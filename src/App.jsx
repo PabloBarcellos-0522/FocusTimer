@@ -1,9 +1,12 @@
+import Button from "./components/button.jsx"
+
 function App() {
-  return (
-    <>
-      <h1 className="text-9xl">Pomodoro</h1>
-    </>
-  )
+    return (
+        <>
+            <Button isSuperButton text={"Hello"} />
+            <Button isTask text={"Hello"} size={400} />
+        </>
+    )
 }
 
 export default App

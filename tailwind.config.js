@@ -35,6 +35,12 @@ export default {
       fontFamily: {
         inter: ["Inter", "sans-serif"],
       },
+
+      fontSize: {
+        small: "15px",
+        padrao: "17px",
+        big: "20px",
+      },
     },
   },
   plugins: [],
