@@ -3,3 +3,29 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer base {
+    :root {
+        --color-primary: 224 78 78; /* #E04E4E */
+        --color-secundary: 166 50 50; /* #A63232 */
+        --color-primary-faded: 195 99 99; /* #C36363 */
+        --color-primary-faded-hover: 184 91 91; /* #B85B5B */
+        --color-background: 40 40 40; /* hex: #282828 */
+        --color-config: 51 51 51; /* hex: #333333 */
+        --color-text: 255 255 255; /* hex: #FFFFFF */
+        --color-text-secundary: 224 224 224; /* hex: #E0E0E0 */
+    }
+
+    .theme-short {
+        --color-primary: 56 133 138; /* hex: #38858A */
+        --color-secundary: 41 95 99; /* #295F63 */
+        --color-primary-faded: 100 174 188; /* #64AEBC */
+        --color-primary-faded-hover: 81 155 169; /* #519BA9 */
+    }
+    .theme-long {
+        --color-primary: 77 124 158; /* hex: #4D7C9E */
+        --color-secundary: 53 99 132; /* #356384 */
+        --color-primary-faded: 99 152 195; /* #6398C3 */
+        --color-primary-faded-hover: 79 134 179; /* #4F86B3 */
+    }
+}
