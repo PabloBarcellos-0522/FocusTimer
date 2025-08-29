@@ -17,7 +17,7 @@ function App() {
     }
 
     return (
-        <div className="bg-theme-background min-h-screen">
+        <div>
             <button
                 onClick={toggleTheme}
                 className="m-4 p-2 bg-theme-primary text-theme-text rounded-lg"
