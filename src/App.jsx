@@ -2,31 +2,46 @@ import { useState, useEffect } from "react"
 import Button from "./components/button.jsx"
 
 function App() {
-    const [isDarkTheme, setIsDarkTheme] = useState(false)
+    const [isDarkTheme, setIsDarkTheme] = useState("pomodoro")
 
     useEffect(() => {
-        if (isDarkTheme) {
+        document.documentElement.classList.remove("theme-short", "theme-long")
+
+        if (isDarkTheme === "short") {
+            document.documentElement.classList.add("theme-short")
+        } else if (isDarkTheme === "long") {
             document.documentElement.classList.add("theme-long")
-        } else {
-            document.documentElement.classList.remove("theme-long")
         }
     }, [isDarkTheme])
 
-    const toggleTheme = () => {
-        setIsDarkTheme((prevTheme) => !prevTheme)
+    const toggleTheme = (theme) => {
+        setIsDarkTheme(theme)
     }
 
     return (
-        <div>
-            <button
-                onClick={toggleTheme}
-                className="m-4 p-2 bg-theme-primary text-theme-text rounded-lg"
-            >
-                Toggle Theme
-            </button>
-            <Button isSuperButton text={"Hello"} />
+        <>
+            <div className=" flex flex-row">
+                <Button
+                    onClick={() => toggleTheme("pomodoro")}
+                    isSuperButton
+                    text={"Pomodoro"}
+                    pressed={isDarkTheme === "pomodoro"}
+                />
+                <Button
+                    onClick={() => toggleTheme("short")}
+                    isSuperButton
+                    text={"Short"}
+                    pressed={isDarkTheme === "short"}
+                />
+                <Button
+                    onClick={() => toggleTheme("long")}
+                    isSuperButton
+                    text={"Long"}
+                    pressed={isDarkTheme === "long"}
+                />
+            </div>
             <Button isTask text={"Hello"} size={400} />
-        </div>
+        </>
     )
 }
 

@@ -1,5 +1,4 @@
 import { PencilIcon, TrashIcon } from "./Icons.jsx"
-import { useState } from "react"
 
 const Button = ({
     onClick = () => null,
@@ -7,13 +6,8 @@ const Button = ({
     size = 150,
     isTask = false,
     isSuperButton = false,
+    pressed = false,
 }) => {
-    const [pressed, setPressed] = useState(false)
-
-    const handlePress = () => {
-        onClick()
-        setPressed(!pressed)
-    }
     const baseLayout = isTask ? `justify-between px-5` : `justify-center px-10`
 
     const baseShadow = isTask
@@ -22,7 +16,7 @@ const Button = ({
 
     return (
         <button
-            onClick={handlePress}
+            onClick={onClick}
             className={`
                 h-[52px]
                 m-5
@@ -30,12 +24,14 @@ const Button = ({
                 flex
                 items-center
                 transition-all duration-[30ms]
+                bg-theme-text
+                text-theme-secundary
                 
                 ${baseLayout}
                 ${
                     pressed && isSuperButton
-                        ? "shadow-[0_-3px_0_0_rgba(0,0,1,0.25)] translate-y-1.5 bg-theme-primary-faded text-theme-text"
-                        : `${baseShadow} translate-y-0 bg-theme-text text-theme-secundary`
+                        ? "translate-y-2 shadow-none"
+                        : `${baseShadow} translate-y-0`
                 }
         `}
             style={{ width: `${size}px` }}
