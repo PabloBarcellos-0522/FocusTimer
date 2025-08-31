@@ -1,8 +1,9 @@
 import { useState, useEffect } from "react"
 import Button from "./components/button.jsx"
+import Task from "./components/task.jsx"
 
 function App() {
-    const [isDarkTheme, setIsDarkTheme] = useState("pomodoro")
+    const [isDarkTheme, switchTheme] = useState("pomodoro")
 
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
@@ -15,7 +16,7 @@ function App() {
     }, [isDarkTheme])
 
     const toggleTheme = (theme) => {
-        setIsDarkTheme(theme)
+        switchTheme(theme)
     }
 
     return (
@@ -40,7 +41,8 @@ function App() {
                     pressed={isDarkTheme === "long"}
                 />
             </div>
-            <Button isTask text={"Hello"} size={400} />
+
+            <Task isTask text={"Hello"} size={400} />
         </>
     )
 }
