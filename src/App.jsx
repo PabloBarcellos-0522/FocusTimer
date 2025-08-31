@@ -43,6 +43,7 @@ function App() {
             </div>
 
             <Task isTask text={"Hello"} size={400} />
+            <Task size={400} />
         </>
     )
 }

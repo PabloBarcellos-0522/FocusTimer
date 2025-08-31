@@ -28,6 +28,8 @@ const Button = ({
                 text-theme-secundary
                 justify-center px-10
                 font-bold
+                hover:bg-theme-text-secundary
+                hover:shadow-theme-text
                 
                 ${
                     pressed && isSuperButton

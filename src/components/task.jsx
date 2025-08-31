@@ -1,23 +1,22 @@
-import { PencilIcon, TrashIcon } from "./Icons.jsx"
+import { PencilIcon, TrashIcon, PlusCircleIcon } from "./Icons.jsx"
 
 const Task = ({
     isTask = false,
-    text,
+    text = "Add Task",
     size = 150,
     isCompleted = false,
     onToggleComplete = () => null,
+    onClick = () => null,
 }) => {
     const handleTaskAreaClick = (event) => {
-        // Impede que o clique "borbulhe" para o botão principal
         event.stopPropagation()
-        // Chama a função que veio do componente pai
         onToggleComplete()
     }
 
     return (
         <li
-            className={`
-                justify-between px-5   
+            onClick={() => console.log("Clicou na task")}
+            className={`   
                 h-[52px]
                 m-5
                 rounded-md
@@ -26,21 +25,17 @@ const Task = ({
                 transition-all duration-[30ms]
                 bg-theme-text
                 text-theme-secundary
-                shadow-[0_5px_5px_0_rgba(0,0,1,0.25)]`}
+                shadow-[0_5px_5px_0_rgba(0,0,1,0.25)]
+                hover:bg-theme-text-secundary
+                ${isTask ? "justify-between px-5" : "justify-center cursor-pointer"}`}
             style={{ width: `${size}px` }}
+            {...(isTask ? { onClick } : {})}
         >
             <div className="flex gap-3 items-center cursor-pointer" onClick={handleTaskAreaClick}>
-                {isTask && (
-                    <input
-                        type="checkbox"
-                        // O estado 'checked' é controlado pela prop
-                        checked={isCompleted}
-                        // readOnly para garantir que só a div controle a mudança
-                        readOnly
-                    />
-                )}
+                {isTask && <input type="checkbox" checked={isCompleted} readOnly />}
 
-                {/* A classe é aplicada condicionalmente com base na prop */}
+                {!isTask && <PlusCircleIcon className="w-[25px] h-[25px]" />}
+
                 <h1 className={`font-bold ${isCompleted && "line-through"}`}>{text}</h1>
             </div>
 
