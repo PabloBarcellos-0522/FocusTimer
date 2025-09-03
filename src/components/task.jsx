@@ -15,7 +15,6 @@ const Task = ({
 
     return (
         <li
-            onClick={() => console.log("Clicou na task")}
             className={`   
                 h-[52px]
                 m-5
@@ -29,7 +28,7 @@ const Task = ({
                 hover:bg-theme-text-secundary
                 ${isTask ? "justify-between px-5" : "justify-center cursor-pointer"}`}
             style={{ width: `${size}px` }}
-            {...(isTask ? { onClick } : {})}
+            {...(isTask ? {} : { onClick })}
         >
             <div className="flex gap-3 items-center cursor-pointer" onClick={handleTaskAreaClick}>
                 {isTask && <input type="checkbox" checked={isCompleted} readOnly />}

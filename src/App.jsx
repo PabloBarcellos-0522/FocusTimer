@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import Button from "./components/button.jsx"
 import Task from "./components/task.jsx"
+import TaskManager from "./components/taskManager.jsx"
 
 function App() {
     const [isDarkTheme, switchTheme] = useState("pomodoro")
@@ -42,7 +43,7 @@ function App() {
                 />
             </div>
 
-            <Task isTask text={"Hello"} size={400} />
+            <TaskManager />
             <Task size={400} />
         </>
     )
