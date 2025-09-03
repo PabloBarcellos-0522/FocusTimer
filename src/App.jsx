@@ -4,17 +4,18 @@ import Task from "./components/task.jsx"
 import TaskManager from "./components/taskManager.jsx"
 
 function App() {
-    const [isDarkTheme, switchTheme] = useState("pomodoro")
+    const [currentTheme, switchTheme] = useState("pomodoro")
+    const [timeRunning, setTimeRunning] = useState(false)
 
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
 
-        if (isDarkTheme === "short") {
+        if (currentTheme === "short") {
             document.documentElement.classList.add("theme-short")
-        } else if (isDarkTheme === "long") {
+        } else if (currentTheme === "long") {
             document.documentElement.classList.add("theme-long")
         }
-    }, [isDarkTheme])
+    }, [currentTheme])
 
     const toggleTheme = (theme) => {
         switchTheme(theme)
@@ -22,29 +23,60 @@ function App() {
 
     return (
         <>
-            <div className=" flex flex-row">
+            <div className="flex flex-col items-center">
+                <Button text={"LOGO"} size={300} />
+                <div className="flex">
+                    <Button
+                        onClick={() => toggleTheme("pomodoro")}
+                        isSuperButton
+                        text={"Pomodoro"}
+                        pressed={currentTheme === "pomodoro"}
+                    />
+                    <Button
+                        onClick={() => toggleTheme("short")}
+                        isSuperButton
+                        text={"Short"}
+                        pressed={currentTheme === "short"}
+                    />
+                    <Button
+                        onClick={() => toggleTheme("long")}
+                        isSuperButton
+                        text={"Long"}
+                        pressed={currentTheme === "long"}
+                    />
+                </div>
+
+                <div className="w-80 h-80 flex justify-center items-center bg-white rounded-full">
+                    Timer
+                </div>
+
                 <Button
-                    onClick={() => toggleTheme("pomodoro")}
+                    onClick={() => setTimeRunning(!timeRunning)}
                     isSuperButton
-                    text={"Pomodoro"}
-                    pressed={isDarkTheme === "pomodoro"}
-                />
-                <Button
-                    onClick={() => toggleTheme("short")}
-                    isSuperButton
-                    text={"Short"}
-                    pressed={isDarkTheme === "short"}
-                />
-                <Button
-                    onClick={() => toggleTheme("long")}
-                    isSuperButton
-                    text={"Long"}
-                    pressed={isDarkTheme === "long"}
+                    pressed={timeRunning}
+                    text={"Start"}
                 />
             </div>
 
-            <TaskManager />
-            <Task size={400} />
+            {/* Collum 2: */}
+            <div className="flex flex-col items-center">
+                <Button text={"Config"} />
+                <iframe
+                    className="w-[400px] h-60 rounded-lg"
+                    src="https://www.youtube.com/embed/jfKfPfyJRdk"
+                    title="YouTube video player"
+                    // frameBorder="0"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                    allowFullScreen
+                ></iframe>
+
+                <div className="w-[400px] mt-4">
+                    <label className="font-bold text-white">Tasks</label>
+                    <hr className="border-white mt-1 border-2" />
+                </div>
+
+                <TaskManager />
+            </div>
         </>
     )
 }

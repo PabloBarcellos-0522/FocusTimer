@@ -7,13 +7,6 @@ const Button = ({
     isSuperButton = false,
     pressed = false,
 }) => {
-    const handleTaskAreaClick = (event) => {
-        // Impede que o clique "borbulhe" para o botão principal
-        event.stopPropagation()
-        // Chama a função que veio do componente pai
-        onToggleComplete()
-    }
-
     return (
         <button
             onClick={onClick}
@@ -32,9 +25,9 @@ const Button = ({
                 hover:shadow-theme-text
                 
                 ${
-                    pressed && isSuperButton
-                        ? "translate-y-2 shadow-none"
-                        : `shadow-[0_8px_0_0] shadow-theme-text-secundary translate-y-0`
+                    !pressed && isSuperButton
+                        ? "shadow-[0_8px_0_0] shadow-theme-text-secundary translate-y-0 "
+                        : `translate-y-2 shadow-none`
                 }
         `}
             style={{ width: `${size}px` }}

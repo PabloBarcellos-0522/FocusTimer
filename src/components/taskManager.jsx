@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import Task from "./task.jsx"
 
 const TaskManager = () => {
@@ -31,6 +31,7 @@ const TaskManager = () => {
                     onToggleComplete={() => handleToggleComplete(task.id)}
                 />
             ))}
+            <Task size={400} />
         </ul>
     )
 }
