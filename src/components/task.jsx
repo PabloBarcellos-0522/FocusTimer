@@ -1,4 +1,5 @@
 import { PencilIcon, TrashIcon, PlusCircleIcon } from "./Icons.jsx"
+import { useState } from "react"
 
 const Task = ({
     isTask = false,
@@ -8,11 +9,15 @@ const Task = ({
     onToggleComplete = () => null,
     deleteTask = () => null,
     newTask = () => null,
-    onClick = () => null,
+    onChangeText = () => null,
 }) => {
+    const [isEditing, setIsEditing] = useState(!text)
+
     const handleTaskAreaClick = (event) => {
         event.stopPropagation()
-        onToggleComplete()
+        if (!isEditing) {
+            onToggleComplete()
+        }
     }
     const clickDellTask = (event) => {
         event.stopPropagation()
@@ -21,6 +26,28 @@ const Task = ({
     const clickAddTask = (event) => {
         event.stopPropagation()
         newTask()
+    }
+
+    const handleBlur = (e) => {
+        setIsEditing(false)
+        onChangeText(e.target.value)
+    }
+
+    const handleKeyDown = (e) => {
+        if (e.key === "Enter") {
+            e.preventDefault()
+            e.target.blur()
+            if (!text) newTask()
+        } else if (e.key === "Escape") {
+            e.preventDefault()
+            e.target.value = text
+            e.target.blur()
+        }
+    }
+
+    const handleEditClick = (e) => {
+        e.stopPropagation()
+        setIsEditing(true)
     }
 
     return (
@@ -44,25 +71,34 @@ const Task = ({
                 className="flex gap-3 items-center cursor-pointer"
                 onClick={isTask ? handleTaskAreaClick : null}
             >
-                {isTask && <input type="checkbox" checked={isCompleted} readOnly />}
+                {isTask && !isEditing && <input type="checkbox" checked={isCompleted} readOnly />}
 
                 {!isTask && <PlusCircleIcon className="w-[25px] h-[25px]" />}
 
-                <h1 className={`font-bold ${isCompleted && "line-through"}`}>{text}</h1>
+                {isEditing ? (
+                    <input
+                        type="text"
+                        defaultValue={text}
+                        autoFocus
+                        onBlur={handleBlur}
+                        onKeyDown={handleKeyDown}
+                        className="font-bold bg-transparent outline-none w-full"
+                    />
+                ) : (
+                    <h1 className={`font-bold ${isCompleted && "line-through"}`}>{text}</h1>
+                )}
             </div>
 
-            {isTask && (
-                <>
-                    <div className="flex gap-3 text-theme-secundary">
-                        <div className="cursor-pointer" onClick={() => console.log("Editar")}>
-                            <PencilIcon className="w-[25px] h-[25px]" />
-                        </div>
-
-                        <div className="cursor-pointer" onClick={clickDellTask}>
-                            <TrashIcon className="w-[25px] h-[25px]" />
-                        </div>
+            {isTask && !isEditing && (
+                <div className="flex gap-3 text-theme-secundary">
+                    <div className="cursor-pointer" onClick={handleEditClick}>
+                        <PencilIcon className="w-[25px] h-[25px]" />
                     </div>
-                </>
+
+                    <div className="cursor-pointer" onClick={clickDellTask}>
+                        <TrashIcon className="w-[25px] h-[25px]" />
+                    </div>
+                </div>
             )}
         </li>
     )

@@ -26,6 +26,18 @@ const TaskManager = () => {
     const delTask = (taskId) => {
         setTasks((currentTasks) => currentTasks.filter((task) => task.id !== taskId))
     }
+    const textSwap = (taskId, newText) => {
+        const taskToUpdate = tasks.find((task) => task.id === taskId)
+
+        if (taskToUpdate && taskToUpdate.text === "" && newText.trim() === "") {
+            delTask(taskId)
+            return
+        }
+
+        setTasks((currentTasks) =>
+            currentTasks.map((task) => (task.id === taskId ? { ...task, text: newText } : task))
+        )
+    }
 
     return (
         <ul>
@@ -38,9 +50,11 @@ const TaskManager = () => {
                     isCompleted={task.isCompleted}
                     onToggleComplete={() => handleToggleComplete(task.id)}
                     deleteTask={() => delTask(task.id)}
+                    onChangeText={(text) => textSwap(task.id, text)}
+                    newTask={() => addTask("", false)}
                 />
             ))}
-            <Task newTask={() => addTask("Task " + nesxtId.current, false)} size={400} />
+            <Task newTask={() => addTask("", false)} size={400} />
         </ul>
     )
 }
