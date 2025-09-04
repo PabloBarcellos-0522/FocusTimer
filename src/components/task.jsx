@@ -64,14 +64,25 @@ const Task = ({
                 text-theme-secundary
                 shadow-[0_5px_5px_0_rgba(0,0,1,0.25)]
                 hover:bg-theme-text-secundary
-                ${isTask ? "justify-between px-5" : "justify-center cursor-pointer"}`}
+                ${
+                    isTask
+                        ? "justify-between px-5 border-l-8 border-theme-secundary"
+                        : "justify-center cursor-pointer"
+                }`}
             style={{ width: `${size}px` }}
         >
             <div
                 className="flex gap-3 items-center cursor-pointer"
                 onClick={isTask ? handleTaskAreaClick : null}
             >
-                {isTask && !isEditing && <input type="checkbox" checked={isCompleted} readOnly />}
+                {isTask && !isEditing && (
+                    <input
+                        type="checkbox"
+                        checked={isCompleted}
+                        className="accent-theme-primary h-5 w-5"
+                        readOnly
+                    />
+                )}
 
                 {!isTask && <PlusCircleIcon className="w-[25px] h-[25px]" />}
 
