@@ -7,6 +7,7 @@ const Task = ({
     isCompleted = false,
     onToggleComplete = () => null,
     deleteTask = () => null,
+    newTask = () => null,
     onClick = () => null,
 }) => {
     const handleTaskAreaClick = (event) => {
@@ -17,9 +18,14 @@ const Task = ({
         event.stopPropagation()
         deleteTask()
     }
+    const clickAddTask = (event) => {
+        event.stopPropagation()
+        newTask()
+    }
 
     return (
         <li
+            onClick={isTask ? null : clickAddTask}
             className={`   
                 h-[52px]
                 m-5
@@ -33,9 +39,11 @@ const Task = ({
                 hover:bg-theme-text-secundary
                 ${isTask ? "justify-between px-5" : "justify-center cursor-pointer"}`}
             style={{ width: `${size}px` }}
-            {...(isTask ? {} : { onClick })}
         >
-            <div className="flex gap-3 items-center cursor-pointer" onClick={handleTaskAreaClick}>
+            <div
+                className="flex gap-3 items-center cursor-pointer"
+                onClick={isTask ? handleTaskAreaClick : null}
+            >
                 {isTask && <input type="checkbox" checked={isCompleted} readOnly />}
 
                 {!isTask && <PlusCircleIcon className="w-[25px] h-[25px]" />}

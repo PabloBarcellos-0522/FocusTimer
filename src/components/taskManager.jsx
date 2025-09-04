@@ -1,11 +1,13 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 import Task from "./task.jsx"
 
 const TaskManager = () => {
+    const nesxtId = useRef(0)
+
     const [tasks, setTasks] = useState([
-        { id: 1, text: "Fazer café", isCompleted: false },
-        { id: 2, text: "Estudar React", isCompleted: true },
-        { id: 3, text: "Ir para a academia", isCompleted: false },
+        // { id: 1, text: "Fazer café", isCompleted: false },
+        // { id: 2, text: "Estudar React", isCompleted: true },
+        // { id: 3, text: "Ir para a academia", isCompleted: false },
     ])
 
     const handleToggleComplete = (taskId) => {
@@ -17,8 +19,9 @@ const TaskManager = () => {
     }
 
     const addTask = (name, isCompleted) => {
-        const newTask = { id: Date.now(), text: name, isCompleted: isCompleted }
+        const newTask = { id: nesxtId.current, text: name, isCompleted: isCompleted }
         setTasks((currentTasks) => [...currentTasks, newTask])
+        nesxtId.current++
     }
     const delTask = (taskId) => {
         setTasks((currentTasks) => currentTasks.filter((task) => task.id !== taskId))
@@ -37,7 +40,7 @@ const TaskManager = () => {
                     deleteTask={() => delTask(task.id)}
                 />
             ))}
-            <Task size={400} />
+            <Task newTask={() => addTask("Task " + nesxtId.current, false)} size={400} />
         </ul>
     )
 }
