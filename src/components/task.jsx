@@ -6,11 +6,16 @@ const Task = ({
     size = 150,
     isCompleted = false,
     onToggleComplete = () => null,
+    deleteTask = () => null,
     onClick = () => null,
 }) => {
     const handleTaskAreaClick = (event) => {
         event.stopPropagation()
         onToggleComplete()
+    }
+    const clickDellTask = (event) => {
+        event.stopPropagation()
+        deleteTask()
     }
 
     return (
@@ -45,7 +50,7 @@ const Task = ({
                             <PencilIcon className="w-[25px] h-[25px]" />
                         </div>
 
-                        <div className="cursor-pointer" onClick={() => console.log("Excluir")}>
+                        <div className="cursor-pointer" onClick={clickDellTask}>
                             <TrashIcon className="w-[25px] h-[25px]" />
                         </div>
                     </div>

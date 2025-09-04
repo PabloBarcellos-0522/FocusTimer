@@ -16,8 +16,13 @@ const TaskManager = () => {
         )
     }
 
-    const addTask = () => {}
-    const delTask = () => {}
+    const addTask = (name, isCompleted) => {
+        const newTask = { id: Date.now(), text: name, isCompleted: isCompleted }
+        setTasks((currentTasks) => [...currentTasks, newTask])
+    }
+    const delTask = (taskId) => {
+        setTasks((currentTasks) => currentTasks.filter((task) => task.id !== taskId))
+    }
 
     return (
         <ul>
@@ -29,6 +34,7 @@ const TaskManager = () => {
                     size={400}
                     isCompleted={task.isCompleted}
                     onToggleComplete={() => handleToggleComplete(task.id)}
+                    deleteTask={() => delTask(task.id)}
                 />
             ))}
             <Task size={400} />
