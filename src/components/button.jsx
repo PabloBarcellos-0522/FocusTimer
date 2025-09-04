@@ -1,4 +1,5 @@
-import { PencilIcon, TrashIcon } from "./Icons.jsx"
+import buttonSoundFile from "../assets/ButtonClick.mp3"
+const ButtonSound = new Audio(buttonSoundFile)
 
 const Button = ({
     onClick = () => null,
@@ -7,9 +8,16 @@ const Button = ({
     isSuperButton = false,
     pressed = false,
 }) => {
+    const press = () => {
+        ButtonSound.currentTime = 0
+        ButtonSound.volume = 0.2
+        ButtonSound.play()
+        onClick()
+    }
+
     return (
         <button
-            onClick={onClick}
+            onClick={press}
             className={`
                 h-[52px]
                 m-5

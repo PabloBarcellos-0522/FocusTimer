@@ -62,7 +62,7 @@ function App() {
             <div className="flex flex-col items-center">
                 <Button text={"Config"} />
                 <iframe
-                    className="w-[400px] h-60 rounded-lg"
+                    className="w-[399px] h-56 rounded-lg"
                     src="https://www.youtube.com/embed/jfKfPfyJRdk"
                     title="YouTube video player"
                     // frameBorder="0"
