@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Button from "./components/button.jsx"
 import Task from "./components/task.jsx"
 import TaskManager from "./components/taskManager.jsx"
+import Timer from "./components/Timer.jsx"
 
 function App() {
     const [currentTheme, switchTheme] = useState("pomodoro")
@@ -46,15 +47,13 @@ function App() {
                     />
                 </div>
 
-                <div className="w-80 h-80 flex justify-center items-center bg-white rounded-full">
-                    Timer
-                </div>
+                <Timer theme={currentTheme} isRunning={timeRunning} />
 
                 <Button
                     onClick={() => setTimeRunning(!timeRunning)}
                     isSuperButton
                     pressed={timeRunning}
-                    text={"Start"}
+                    text={timeRunning ? "Stop" : "Start"}
                 />
             </div>
 
