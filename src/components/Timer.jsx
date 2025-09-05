@@ -44,7 +44,7 @@ const Timer = ({ theme, isRunning }) => {
                 <circle
                     cx="100"
                     cy="100"
-                    r={radius}
+                    r={radius - 1}
                     className="stroke-current text-theme-text-secundary"
                     strokeWidth="10"
                     fill="white"
@@ -54,7 +54,7 @@ const Timer = ({ theme, isRunning }) => {
                     cx="100"
                     cy="100"
                     r={radius}
-                    className="stroke-current text-theme-secundary transition-all duration-1000 ease-linear"
+                    className="stroke-current text-theme-secundary transition-[stroke-dashoffset] duration-500 ease-linear"
                     strokeWidth="10"
                     fill="transparent"
                     strokeDasharray={circumference}
