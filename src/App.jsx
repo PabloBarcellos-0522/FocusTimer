@@ -22,32 +22,51 @@ function App() {
         switchTheme(theme)
     }
 
+    const nextTheme = () => {
+        if (currentTheme === "pomodoro") {
+            toggleTheme("short")
+        } else if (currentTheme === "short") {
+            toggleTheme("long")
+        } else if (currentTheme === "long") {
+            toggleTheme("pomodoro")
+        }
+    }
+
     return (
         <>
             <div className="flex flex-col items-center">
                 <Button text={"LOGO"} size={300} />
                 <div className="flex">
                     <Button
-                        onClick={() => toggleTheme("pomodoro")}
+                        onClick={() => {
+                            toggleTheme("pomodoro")
+                            setTimeRunning(false)
+                        }}
                         isSuperButton
                         text={"Pomodoro"}
                         pressed={currentTheme === "pomodoro"}
                     />
                     <Button
-                        onClick={() => toggleTheme("short")}
+                        onClick={() => {
+                            toggleTheme("short")
+                            setTimeRunning(false)
+                        }}
                         isSuperButton
                         text={"Short"}
                         pressed={currentTheme === "short"}
                     />
                     <Button
-                        onClick={() => toggleTheme("long")}
+                        onClick={() => {
+                            toggleTheme("long")
+                            setTimeRunning(false)
+                        }}
                         isSuperButton
                         text={"Long"}
                         pressed={currentTheme === "long"}
                     />
                 </div>
 
-                <Timer theme={currentTheme} isRunning={timeRunning} />
+                <Timer themeSwap={nextTheme} theme={currentTheme} isRunning={timeRunning} />
 
                 <Button
                     onClick={() => setTimeRunning(!timeRunning)}

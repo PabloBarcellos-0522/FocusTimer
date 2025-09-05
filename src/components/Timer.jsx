@@ -6,7 +6,7 @@ const THEME_TIMES = {
     long: 15 * 60,
 }
 
-const Timer = ({ theme, isRunning }) => {
+const Timer = ({ theme, isRunning, themeSwap = () => null }) => {
     const totalTime = THEME_TIMES[theme]
     const [timeLeft, setTimeLeft] = useState(totalTime)
 
@@ -23,8 +23,10 @@ const Timer = ({ theme, isRunning }) => {
 
     // Countdown logic
     useEffect(() => {
-        if (!isRunning || timeLeft <= 0) {
+        if (!isRunning) {
             return
+        } else if (timeLeft <= 0) {
+            themeSwap()
         }
 
         const intervalId = setInterval(() => {
