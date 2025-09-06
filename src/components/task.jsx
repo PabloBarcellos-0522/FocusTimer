@@ -96,7 +96,13 @@ const Task = ({
                         className="font-bold bg-transparent outline-none w-full"
                     />
                 ) : (
-                    <h1 className={`font-bold ${isCompleted && "line-through"}`}>{text}</h1>
+                    <h1
+                        className={`font-bold relative after:content-[''] after:absolute after:bg-current after:h-[2px] after:top-1/2 after:-translate-y-1/2 after:left-0 after:transition-[width] after:duration-500 after:ease-in-out ${
+                            isCompleted ? "after:w-full" : "after:w-0"
+                        }`}
+                    >
+                        {text}
+                    </h1>
                 )}
             </div>
 
