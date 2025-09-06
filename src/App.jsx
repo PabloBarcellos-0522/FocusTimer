@@ -7,6 +7,7 @@ import Timer from "./components/Timer.jsx"
 function App() {
     const [currentTheme, switchTheme] = useState("pomodoro")
     const [timeRunning, setTimeRunning] = useState(false)
+    const [ThemeSequence, setPomodorus] = useState(1)
 
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
@@ -23,11 +24,20 @@ function App() {
     }
 
     const nextTheme = () => {
+        if (ThemeSequence < 4 && currentTheme === "pomodoro") {
+            setPomodorus(ThemeSequence + 1)
+        } else if (currentTheme === "long") {
+            toggleTheme("pomodoro")
+            setPomodorus(1)
+        }
+
+        if (ThemeSequence >= 4 && currentTheme === "pomodoro") {
+            return toggleTheme("long")
+        }
+
         if (currentTheme === "pomodoro") {
             toggleTheme("short")
         } else if (currentTheme === "short") {
-            toggleTheme("long")
-        } else if (currentTheme === "long") {
             toggleTheme("pomodoro")
         }
     }

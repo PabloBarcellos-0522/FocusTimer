@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 const THEME_TIMES = {
-    pomodoro: 25 * 60,
+    pomodoro: 3,
     short: 5 * 60,
     long: 15 * 60,
 }
@@ -23,10 +23,13 @@ const Timer = ({ theme, isRunning, themeSwap = () => null }) => {
 
     // Countdown logic
     useEffect(() => {
+        if (isRunning && timeLeft <= 0) {
+            setTimeout(themeSwap, 1000)
+            return
+        }
+
         if (!isRunning) {
             return
-        } else if (timeLeft <= 0) {
-            themeSwap()
         }
 
         const intervalId = setInterval(() => {
