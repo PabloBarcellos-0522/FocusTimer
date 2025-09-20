@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import Button from "./components/button.jsx"
-import Task from "./components/task.jsx"
 import TaskManager from "./components/taskManager.jsx"
 import Timer from "./components/Timer.jsx"
 
@@ -90,7 +89,7 @@ function App() {
             <div className="flex flex-col items-center">
                 <Button text={"Config"} />
                 <iframe
-                    className="w-[399px] h-56 rounded-lg"
+                    className="w-[399px] h-[225px] rounded-lg"
                     src="https://www.youtube.com/embed/jfKfPfyJRdk"
                     title="YouTube video player"
                     // frameBorder="0"
