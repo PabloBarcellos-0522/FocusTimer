@@ -2,6 +2,7 @@ import { useState, useEffect } from "react"
 import Button from "./components/button.jsx"
 import TaskManager from "./components/taskManager.jsx"
 import Timer from "./components/Timer.jsx"
+import logo from "../public/FocusTimer Logo.png"
 
 function App() {
     const [currentTheme, switchTheme] = useState("pomodoro")
@@ -44,7 +45,9 @@ function App() {
     return (
         <>
             <div className="flex flex-col items-center">
-                <Button text={"LOGO"} size={300} />
+                <div className="w-48 h-[60px] bg-theme-text mt-5 rounded-md flex items-center cursor-pointer">
+                    <img src={logo} alt="" srcset="" />
+                </div>
                 <div className="flex">
                     <Button
                         onClick={() => {

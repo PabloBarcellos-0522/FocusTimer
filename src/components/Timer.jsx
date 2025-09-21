@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 
 const THEME_TIMES = {
-    pomodoro: 5 * 60,
+    pomodoro: 25 * 60,
     short: 5 * 60,
     long: 15 * 60,
 }

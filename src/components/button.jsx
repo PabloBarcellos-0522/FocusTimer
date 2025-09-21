@@ -10,7 +10,7 @@ const Button = ({
 }) => {
     const press = () => {
         ButtonSound.currentTime = 0
-        ButtonSound.volume = 0.2
+        ButtonSound.volume = 1
         ButtonSound.play()
         onClick()
     }
