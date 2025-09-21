@@ -1,13 +1,15 @@
 import { useState, useEffect } from "react"
-import Button from "./components/button.jsx"
-import TaskManager from "./components/taskManager.jsx"
+import Button from "./components/Button.jsx"
+import TaskManager from "./components/TaskManager.jsx"
 import Timer from "./components/Timer.jsx"
+import SettingsFrame from "./components/SettingsFrame.jsx"
 import logo from "../public/FocusTimer Logo.png"
 
 function App() {
     const [currentTheme, switchTheme] = useState("pomodoro")
     const [timeRunning, setTimeRunning] = useState(false)
     const [ThemeSequence, setPomodorus] = useState(1)
+    const [isSettingsOpen, setSettingsOpen] = useState(false)
 
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
@@ -46,7 +48,7 @@ function App() {
         <>
             <div className="flex flex-col items-center">
                 <div className="w-48 h-[60px] bg-theme-text mt-5 rounded-md flex items-center cursor-pointer">
-                    <img src={logo} alt="" srcset="" />
+                    <img src={logo} alt="FocusTimer Logo" />
                 </div>
                 <div className="flex">
                     <Button
@@ -90,7 +92,7 @@ function App() {
 
             {/* Collum 2: */}
             <div className="flex flex-col items-center">
-                <Button text={"Config"} />
+                <Button text={"Config"} onClick={() => setSettingsOpen(true)} />
                 <iframe
                     className="w-[399px] h-[225px] rounded-lg"
                     src="https://www.youtube.com/embed/jfKfPfyJRdk"
@@ -99,14 +101,18 @@ function App() {
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                     allowFullScreen
                 ></iframe>
-
                 <div className="w-[400px] mt-4">
                     <label className="font-bold text-white">Tasks</label>
                     <hr className="border-white mt-1 border-2" />
                 </div>
-
                 <TaskManager />
             </div>
+
+            {isSettingsOpen && (
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                    <SettingsFrame onClose={() => setSettingsOpen(false)} />
+                </div>
+            )}
         </>
     )
 }

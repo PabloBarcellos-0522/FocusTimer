@@ -1,5 +1,5 @@
 import { useRef, useState } from "react"
-import Task from "./task.jsx"
+import Task from "./Task.jsx"
 
 const TaskManager = () => {
     const nesxtId = useRef(0)
