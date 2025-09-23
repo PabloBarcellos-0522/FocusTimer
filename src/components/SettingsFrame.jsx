@@ -51,6 +51,15 @@ const SettingsFrame = ({ onClose, timePomo, timeShort, timeLong, setPomo, setSho
                     onChange={(newValue) => setLong(newValue)}
                 />
             </div>
+
+            <br />
+            <Toggle label={"Auto Start Breaks"} />
+            <Toggle label={"Auto Start Pomodoros"} />
+
+            <div className="w-full">
+                <hr className="border-white mt-1 border-1" />
+            </div>
+            <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
         </div>
     )
 }
