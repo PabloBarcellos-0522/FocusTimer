@@ -11,6 +11,10 @@ function App() {
     const [ThemeSequence, setPomodorus] = useState(1)
     const [isSettingsOpen, setSettingsOpen] = useState(false)
 
+    const [timePomo, setPomo] = useState(25)
+    const [timeShort, setShort] = useState(5)
+    const [timeLong, setLong] = useState(15)
+
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
 
@@ -110,7 +114,15 @@ function App() {
 
             {isSettingsOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
-                    <SettingsFrame onClose={() => setSettingsOpen(false)} />
+                    <SettingsFrame
+                        onClose={() => setSettingsOpen(false)}
+                        timePomo={timePomo}
+                        timeShort={timeShort}
+                        timeLong={timeLong}
+                        setPomo={setPomo}
+                        setShort={setShort}
+                        setLong={setLong}
+                    />
                 </div>
             )}
         </>

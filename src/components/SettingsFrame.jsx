@@ -1,7 +1,7 @@
 import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 
-const SettingsFrame = ({ onClose }) => {
+const SettingsFrame = ({ onClose, timePomo, timeShort, timeLong, setPomo, setShort, setLong }) => {
     return (
         <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative">
             <button
@@ -33,9 +33,23 @@ const SettingsFrame = ({ onClose }) => {
             <h1 className="text-theme-text text-xl w-full m-3">Timer (Minutes)</h1>
 
             <div className="flex gap-5">
-                <TimeInput label={"Pomodoro"} value={20} />
-                <TimeInput label={"Short Break"} value={20} />
-                <TimeInput label={"Long Break"} value={20} />
+                <TimeInput
+                    label={"Pomodoro"}
+                    value={timePomo}
+                    onChange={(newValue) => setPomo(newValue)}
+                />
+
+                <TimeInput
+                    label={"Short Break"}
+                    value={timeShort}
+                    onChange={(newValue) => setShort(newValue)}
+                />
+
+                <TimeInput
+                    label={"Long Break"}
+                    value={timeLong}
+                    onChange={(newValue) => setLong(newValue)}
+                />
             </div>
         </div>
     )

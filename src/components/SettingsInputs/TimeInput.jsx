@@ -5,7 +5,10 @@ const TimeInput = ({ label, value, onChange }) => {
             <input
                 type="number"
                 value={value}
-                onChange={(e) => onChange(Number(e.target.value))}
+                onChange={(e) => {
+                    const val = e.target.value
+                    onChange(val === "" ? "" : Number(val))
+                }}
                 className="w-24 h-14 rounded-lg text-center text-theme-text bg-theme-config"
                 min="1"
             />
