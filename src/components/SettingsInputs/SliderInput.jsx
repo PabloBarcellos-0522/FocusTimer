@@ -2,7 +2,7 @@ const SliderInput = ({ label, value, onChange, min = 0, max = 100 }) => {
     const percentage = max > min ? ((value - min) / (max - min)) * 100 : 0
 
     return (
-        <div className="w-full px-2 py-2">
+        <div className="w-full px-5 py-2">
             {label && <label className="text-theme-text mb-2 block text-sm">{label}</label>}
             <div className="relative h-8 flex items-center">
                 {/* Background Track */}

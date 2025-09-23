@@ -15,6 +15,9 @@ function App() {
     const [timeShort, setShort] = useState(5)
     const [timeLong, setLong] = useState(15)
 
+    const [breakToggle, setBreak] = useState(false)
+    const [autoStartToggle, setautoStart] = useState(true)
+
     const [volume, setVolume] = useState(50)
 
     useEffect(() => {
@@ -124,6 +127,10 @@ function App() {
                         setPomo={setPomo}
                         setShort={setShort}
                         setLong={setLong}
+                        breakToggle={breakToggle}
+                        setBreak={setBreak}
+                        autoStartToggle={autoStartToggle}
+                        setautoStart={setautoStart}
                         volume={volume}
                         setVolume={setVolume}
                     />

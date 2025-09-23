@@ -1,7 +1,6 @@
 import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
-import { useState } from "react"
 
 const SettingsFrame = ({
     onClose,
@@ -11,6 +10,10 @@ const SettingsFrame = ({
     setPomo,
     setShort,
     setLong,
+    breakToggle,
+    setBreak,
+    autoStartToggle,
+    setautoStart,
     volume,
     setVolume,
 }) => {
@@ -69,22 +72,25 @@ const SettingsFrame = ({
             </div>
 
             <br />
-            <Toggle label={"Auto Start Breaks"} />
-            <Toggle label={"Auto Start Pomodoros"} />
+            <Toggle
+                label={"Auto Start Breaks"}
+                state={breakToggle}
+                onChange={() => setBreak(!breakToggle)}
+            />
+            <Toggle
+                label={"Auto Start Pomodoros"}
+                state={autoStartToggle}
+                onChange={() => setautoStart(!autoStartToggle)}
+            />
 
+            <br />
             <div className="w-full">
                 <hr className="border-white mt-1 border-1" />
             </div>
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
 
             <br />
-            <SliderInput
-                label={"Volume"}
-                value={volume}
-                onChange={handleVolumeChange}
-                min={0}
-                max={100}
-            />
+            <SliderInput value={volume} onChange={handleVolumeChange} />
         </div>
     )
 }
