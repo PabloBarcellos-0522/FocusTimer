@@ -1,8 +1,9 @@
-import Button from "./Button.jsx"
+import TimeInput from "./SettingsInputs/TimeInput.jsx"
+import Toggle from "./SettingsInputs/Toggle.jsx"
 
 const SettingsFrame = ({ onClose }) => {
     return (
-        <div className="w-[450px] flex flex-col items-center bg-theme-config p-5 rounded-lg shadow-lg relative">
+        <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative">
             <button
                 onClick={onClose}
                 className="absolute top-3 right-3 text-white hover:text-gray-300"
@@ -27,10 +28,15 @@ const SettingsFrame = ({ onClose }) => {
             {/* Content of the settings will go here */}
 
             <div className="w-full">
-                <label className="font-bold text-white"></label>
                 <hr className="border-white mt-1 border-1" />
             </div>
-            <Button text={"Hello"}></Button>
+            <h1 className="text-theme-text text-xl w-full m-3">Timer (Minutes)</h1>
+
+            <div className="flex gap-5">
+                <TimeInput label={"Pomodoro"} value={20} />
+                <TimeInput label={"Short Break"} value={20} />
+                <TimeInput label={"Long Break"} value={20} />
+            </div>
         </div>
     )
 }
