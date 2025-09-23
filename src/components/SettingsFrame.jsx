@@ -1,7 +1,23 @@
 import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
+import SliderInput from "./SettingsInputs/SliderInput.jsx"
+import { useState } from "react"
 
-const SettingsFrame = ({ onClose, timePomo, timeShort, timeLong, setPomo, setShort, setLong }) => {
+const SettingsFrame = ({
+    onClose,
+    timePomo,
+    timeShort,
+    timeLong,
+    setPomo,
+    setShort,
+    setLong,
+    volume,
+    setVolume,
+}) => {
+    const handleVolumeChange = (event) => {
+        setVolume(event.target.value)
+    }
+
     return (
         <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative">
             <button
@@ -60,6 +76,15 @@ const SettingsFrame = ({ onClose, timePomo, timeShort, timeLong, setPomo, setSho
                 <hr className="border-white mt-1 border-1" />
             </div>
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
+
+            <br />
+            <SliderInput
+                label={"Volume"}
+                value={volume}
+                onChange={handleVolumeChange}
+                min={0}
+                max={100}
+            />
         </div>
     )
 }

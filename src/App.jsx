@@ -15,6 +15,8 @@ function App() {
     const [timeShort, setShort] = useState(5)
     const [timeLong, setLong] = useState(15)
 
+    const [volume, setVolume] = useState(50)
+
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
 
@@ -122,6 +124,8 @@ function App() {
                         setPomo={setPomo}
                         setShort={setShort}
                         setLong={setLong}
+                        volume={volume}
+                        setVolume={setVolume}
                     />
                 </div>
             )}
