@@ -20,6 +20,9 @@ function App() {
 
     const [volume, setVolume] = useState(50)
 
+    const settingsValues = { timePomo, timeShort, timeLong, breakToggle, autoStartToggle, volume }
+    const settingsSetters = { setPomo, setShort, setLong, setBreak, setautoStart, setVolume }
+
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
 
@@ -121,18 +124,8 @@ function App() {
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
                     <SettingsFrame
                         onClose={() => setSettingsOpen(false)}
-                        timePomo={timePomo}
-                        timeShort={timeShort}
-                        timeLong={timeLong}
-                        setPomo={setPomo}
-                        setShort={setShort}
-                        setLong={setLong}
-                        breakToggle={breakToggle}
-                        setBreak={setBreak}
-                        autoStartToggle={autoStartToggle}
-                        setautoStart={setautoStart}
-                        volume={volume}
-                        setVolume={setVolume}
+                        values={settingsValues}
+                        setters={settingsSetters}
                     />
                 </div>
             )}

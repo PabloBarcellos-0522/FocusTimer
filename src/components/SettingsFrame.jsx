@@ -2,23 +2,9 @@ import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
 
-const SettingsFrame = ({
-    onClose,
-    timePomo,
-    timeShort,
-    timeLong,
-    setPomo,
-    setShort,
-    setLong,
-    breakToggle,
-    setBreak,
-    autoStartToggle,
-    setautoStart,
-    volume,
-    setVolume,
-}) => {
+const SettingsFrame = ({ onClose, values, setters }) => {
     const handleVolumeChange = (event) => {
-        setVolume(event.target.value)
+        setters.setVolume(event.target.value)
     }
 
     return (
@@ -54,33 +40,33 @@ const SettingsFrame = ({
             <div className="flex gap-5">
                 <TimeInput
                     label={"Pomodoro"}
-                    value={timePomo}
-                    onChange={(newValue) => setPomo(newValue)}
+                    value={values.timePomo}
+                    onChange={(newValue) => setters.setPomo(newValue)}
                 />
 
                 <TimeInput
                     label={"Short Break"}
-                    value={timeShort}
-                    onChange={(newValue) => setShort(newValue)}
+                    value={values.timeShort}
+                    onChange={(newValue) => setters.setShort(newValue)}
                 />
 
                 <TimeInput
                     label={"Long Break"}
-                    value={timeLong}
-                    onChange={(newValue) => setLong(newValue)}
+                    value={values.timeLong}
+                    onChange={(newValue) => setters.setLong(newValue)}
                 />
             </div>
 
             <br />
             <Toggle
                 label={"Auto Start Breaks"}
-                state={breakToggle}
-                onChange={() => setBreak(!breakToggle)}
+                state={values.breakToggle}
+                onChange={() => setters.setBreak(!values.breakToggle)}
             />
             <Toggle
                 label={"Auto Start Pomodoros"}
-                state={autoStartToggle}
-                onChange={() => setautoStart(!autoStartToggle)}
+                state={values.autoStartToggle}
+                onChange={() => setters.setautoStart(!values.autoStartToggle)}
             />
 
             <br />
@@ -90,7 +76,7 @@ const SettingsFrame = ({
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
 
             <br />
-            <SliderInput value={volume} onChange={handleVolumeChange} />
+            <SliderInput value={values.volume} onChange={handleVolumeChange} />
         </div>
     )
 }
