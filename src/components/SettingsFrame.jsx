@@ -1,6 +1,7 @@
 import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
+import SondSelect from "./SettingsInputs/SongSelect.jsx"
 
 const SettingsFrame = ({ onClose, values, setters }) => {
     const handleVolumeChange = (event) => {
@@ -77,6 +78,7 @@ const SettingsFrame = ({ onClose, values, setters }) => {
 
             <br />
             <SliderInput value={values.volume} onChange={handleVolumeChange} />
+            <SondSelect label={"Sond Tick"} />
         </div>
     )
 }
