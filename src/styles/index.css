@@ -29,3 +29,13 @@
         --color-primary-faded-hover: 79 134 179; /* #4F86B3 */
     }
 }
+
+@layer utilities {
+    .no-scrollbar::-webkit-scrollbar {
+        display: none;
+    }
+    .no-scrollbar {
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+    }
+}

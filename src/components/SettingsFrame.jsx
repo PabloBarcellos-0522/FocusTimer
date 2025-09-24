@@ -1,15 +1,21 @@
 import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
-import SondSelect from "./SettingsInputs/SongSelect.jsx"
+import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
 
 const SettingsFrame = ({ onClose, values, setters }) => {
     const handleVolumeChange = (event) => {
         setters.setVolume(event.target.value)
     }
 
+    const availableSounds = [
+        { value: "src/assets/ButtonClick.mp3", label: "Som A" },
+        { value: "path/to/sound2.mp3", label: "Som B" },
+        { value: "path/to/sound3.mp3", label: "Som C" },
+    ]
+
     return (
-        <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative">
+        <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative overflow-auto max-h-[90%] no-scrollbar">
             <button
                 onClick={onClose}
                 className="absolute top-3 right-3 text-white hover:text-gray-300"
@@ -77,8 +83,21 @@ const SettingsFrame = ({ onClose, values, setters }) => {
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
 
             <br />
+            <SoundSelect options={availableSounds} label={"Alarm Sound"} />
             <SliderInput value={values.volume} onChange={handleVolumeChange} />
-            <SondSelect label={"Sond Tick"} />
+            <SoundSelect options={availableSounds} label={"Ticking Sound"} />
+            <SliderInput value={values.volume} onChange={handleVolumeChange} />
+
+            <Toggle
+                label={"Auto start vídeo"}
+                state={values.breakToggle}
+                onChange={() => setters.setBreak(!values.breakToggle)}
+            />
+            <Toggle
+                label={"Auto pause vídeo"}
+                state={values.autoStartToggle}
+                onChange={() => setters.setautoStart(!values.autoStartToggle)}
+            />
         </div>
     )
 }
