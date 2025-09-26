@@ -4,10 +4,6 @@ import SliderInput from "./SettingsInputs/SliderInput.jsx"
 import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
 
 const SettingsFrame = ({ onClose, values, setters }) => {
-    const handleVolumeChange = (event) => {
-        setters.setVolume(event.target.value)
-    }
-
     const availableSounds = [
         { value: "src/assets/ButtonClick.mp3", label: "Som A" },
         { value: "path/to/sound2.mp3", label: "Som B" },
@@ -15,7 +11,7 @@ const SettingsFrame = ({ onClose, values, setters }) => {
     ]
 
     return (
-        <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative overflow-auto max-h-[90%] no-scrollbar">
+        <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative">
             <button
                 onClick={onClose}
                 className="absolute top-3 right-3 text-white hover:text-gray-300"
@@ -84,19 +80,25 @@ const SettingsFrame = ({ onClose, values, setters }) => {
 
             <br />
             <SoundSelect options={availableSounds} label={"Alarm Sound"} />
-            <SliderInput value={values.volume} onChange={handleVolumeChange} />
+            <SliderInput
+                value={values.volume}
+                onChange={() => setters.setVolume(event.target.value)}
+            />
             <SoundSelect options={availableSounds} label={"Ticking Sound"} />
-            <SliderInput value={values.volume} onChange={handleVolumeChange} />
+            <SliderInput
+                value={values.volume2}
+                onChange={() => setters.setVolume2(event.target.value)}
+            />
 
             <Toggle
                 label={"Auto start vídeo"}
-                state={values.breakToggle}
-                onChange={() => setters.setBreak(!values.breakToggle)}
+                state={values.autoStartToggleVideo}
+                onChange={() => setters.setautoStartVideo(!values.autoStartToggleVideo)}
             />
             <Toggle
                 label={"Auto pause vídeo"}
-                state={values.autoStartToggle}
-                onChange={() => setters.setautoStart(!values.autoStartToggle)}
+                state={values.autoPauseToggleVideo}
+                onChange={() => setters.setautoPauseVideo(!values.autoPauseToggleVideo)}
             />
         </div>
     )

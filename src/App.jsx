@@ -17,11 +17,34 @@ function App() {
 
     const [breakToggle, setBreak] = useState(false)
     const [autoStartToggle, setautoStart] = useState(true)
+    const [autoStartToggleVideo, setautoStartVideo] = useState(false)
+    const [autoPauseToggleVideo, setautoPauseVideo] = useState(false)
 
     const [volume, setVolume] = useState(50)
+    const [volume2, setVolume2] = useState(50)
 
-    const settingsValues = { timePomo, timeShort, timeLong, breakToggle, autoStartToggle, volume }
-    const settingsSetters = { setPomo, setShort, setLong, setBreak, setautoStart, setVolume }
+    const settingsValues = {
+        timePomo,
+        timeShort,
+        timeLong,
+        breakToggle,
+        autoStartToggle,
+        autoStartToggleVideo,
+        autoPauseToggleVideo,
+        volume,
+        volume2,
+    }
+    const settingsSetters = {
+        setPomo,
+        setShort,
+        setLong,
+        setBreak,
+        setautoStart,
+        setautoStartVideo,
+        setautoPauseVideo,
+        setVolume,
+        setVolume2,
+    }
 
     useEffect(() => {
         document.documentElement.classList.remove("theme-short", "theme-long")
@@ -32,6 +55,17 @@ function App() {
             document.documentElement.classList.add("theme-long")
         }
     }, [currentTheme])
+
+    useEffect(() => {
+        if (isSettingsOpen) {
+            document.body.style.overflow = "hidden"
+        } else {
+            document.body.style.overflow = "unset"
+        }
+        return () => {
+            document.body.style.overflow = "unset"
+        }
+    }, [isSettingsOpen])
 
     const toggleTheme = (theme) => {
         switchTheme(theme)
@@ -121,7 +155,7 @@ function App() {
             </div>
 
             {isSettingsOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center">
+                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start overflow-y-auto no-scrollbar z-10 py-14">
                     <SettingsFrame
                         onClose={() => setSettingsOpen(false)}
                         values={settingsValues}
