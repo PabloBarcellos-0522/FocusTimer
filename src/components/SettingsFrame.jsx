@@ -4,10 +4,15 @@ import SliderInput from "./SettingsInputs/SliderInput.jsx"
 import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
 
 const SettingsFrame = ({ onClose, values, setters }) => {
-    const availableSounds = [
+    const availableAlarmSounds = [
         { value: "src/assets/ButtonClick.mp3", label: "Som A" },
         { value: "path/to/sound2.mp3", label: "Som B" },
         { value: "path/to/sound3.mp3", label: "Som C" },
+    ]
+    const availableTickingSounds = [
+        { value: "src/assets/TickingSounds/clock-ticking-fast.mp3", label: "Ticking Fast" },
+        { value: "src/assets/TickingSounds/ticking-clock_1.mp3", label: "Ticking Slow" },
+        { value: "src/assets/TickingSounds/Black-Noise.mp3", label: "Black Noise" },
     ]
 
     return (
@@ -79,12 +84,12 @@ const SettingsFrame = ({ onClose, values, setters }) => {
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
 
             <br />
-            <SoundSelect options={availableSounds} label={"Alarm Sound"} />
+            <SoundSelect options={availableAlarmSounds} label={"Alarm Sound"} />
             <SliderInput
                 value={values.volume}
                 onChange={() => setters.setVolume(event.target.value)}
             />
-            <SoundSelect options={availableSounds} label={"Ticking Sound"} />
+            <SoundSelect options={availableTickingSounds} label={"Ticking Sound"} />
             <SliderInput
                 value={values.volume2}
                 onChange={() => setters.setVolume2(event.target.value)}
