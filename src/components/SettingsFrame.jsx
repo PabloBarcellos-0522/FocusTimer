@@ -1,9 +1,25 @@
+import { useEffect, useRef } from "react"
 import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
 import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
 
 const SettingsFrame = ({ onClose, values, setters }) => {
+    const settingsRef = useRef(null)
+
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (settingsRef.current && !settingsRef.current.contains(event.target)) {
+                onClose()
+            }
+        }
+
+        document.addEventListener("mousedown", handleClickOutside)
+        return () => {
+            document.removeEventListener("mousedown", handleClickOutside)
+        }
+    }, [onClose])
+
     const availableAlarmSounds = [
         { value: "src/assets/AlarmSounds/Ding.mp3", label: "Ding" },
         { value: "src/assets/AlarmSounds/Minimal.mp3", label: "Minimal" },
@@ -18,7 +34,10 @@ const SettingsFrame = ({ onClose, values, setters }) => {
     ]
 
     return (
-        <div className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative">
+        <div
+            ref={settingsRef}
+            className="w-[450px] flex flex-col items-center bg-theme-background p-5 rounded-lg shadow-lg relative"
+        >
             <button
                 onClick={onClose}
                 className="absolute top-3 right-3 text-white hover:text-gray-300"
