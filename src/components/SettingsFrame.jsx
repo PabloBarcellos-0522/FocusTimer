@@ -5,14 +5,16 @@ import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
 
 const SettingsFrame = ({ onClose, values, setters }) => {
     const availableAlarmSounds = [
-        { value: "src/assets/ButtonClick.mp3", label: "Som A" },
-        { value: "path/to/sound2.mp3", label: "Som B" },
-        { value: "path/to/sound3.mp3", label: "Som C" },
+        { value: "src/assets/AlarmSounds/Ding.mp3", label: "Ding" },
+        { value: "src/assets/AlarmSounds/Minimal.mp3", label: "Minimal" },
+        { value: "src/assets/AlarmSounds/Modern.mp3", label: "Modern" },
+        { value: "src/assets/AlarmSounds/Notification.mp3", label: "Notification" },
     ]
     const availableTickingSounds = [
         { value: "src/assets/TickingSounds/clock-ticking-fast.mp3", label: "Ticking Fast" },
         { value: "src/assets/TickingSounds/ticking-clock_1.mp3", label: "Ticking Slow" },
         { value: "src/assets/TickingSounds/Black-Noise.mp3", label: "Black Noise" },
+        { value: "src/assets/TickingSounds/white-noise.mp3", label: "White Noise" },
     ]
 
     return (
