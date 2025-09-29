@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 import Button from "./components/Button.jsx"
 import TaskManager from "./components/TaskManager.jsx"
 import Timer from "./components/Timer.jsx"
@@ -16,19 +16,21 @@ function App() {
     const [timeLong, setLong] = useState(15)
 
     const [breakToggle, setBreak] = useState(false)
-    const [autoStartToggle, setautoStart] = useState(true)
+    const [autoStartPomo, setautoStartPomo] = useState(true)
     const [autoStartToggleVideo, setautoStartVideo] = useState(false)
     const [autoPauseToggleVideo, setautoPauseVideo] = useState(false)
 
     const [volume, setVolume] = useState(50)
     const [volume2, setVolume2] = useState(50)
 
+    const playerRef = useRef(null)
+
     const settingsValues = {
         timePomo,
         timeShort,
         timeLong,
         breakToggle,
-        autoStartToggle,
+        autoStartPomo,
         autoStartToggleVideo,
         autoPauseToggleVideo,
         volume,
@@ -39,7 +41,7 @@ function App() {
         setShort,
         setLong,
         setBreak,
-        setautoStart,
+        setautoStartPomo,
         setautoStartVideo,
         setautoPauseVideo,
         setVolume,
@@ -66,6 +68,40 @@ function App() {
             document.body.style.overflow = "unset"
         }
     }, [isSettingsOpen])
+
+    useEffect(() => {
+        const initializePlayer = () => {
+            playerRef.current = new window.YT.Player("youtube-player", {})
+        }
+
+        if (!window.YT) {
+            const tag = document.createElement("script")
+            tag.src = "https://www.youtube.com/iframe_api"
+            const firstScriptTag = document.getElementsByTagName("script")[0]
+            firstScriptTag.parentNode.insertBefore(tag, firstScriptTag)
+            window.onYouTubeIframeAPIReady = initializePlayer
+        } else {
+            initializePlayer()
+        }
+
+        return () => {
+            window.onYouTubeIframeAPIReady = null
+        }
+    }, [])
+
+    useEffect(() => {
+        const player = playerRef.current
+
+        if (!player || typeof player.playVideo !== "function") {
+            return
+        }
+
+        if (timeRunning && autoStartToggleVideo) {
+            player.playVideo()
+        } else if (!timeRunning && autoPauseToggleVideo) {
+            player.pauseVideo()
+        }
+    }, [timeRunning, autoStartToggleVideo, autoPauseToggleVideo])
 
     const toggleTheme = (theme) => {
         switchTheme(theme)
@@ -140,8 +176,9 @@ function App() {
             <div className="flex flex-col items-center">
                 <Button text={"Config"} onClick={() => setSettingsOpen(true)} />
                 <iframe
+                    id="youtube-player"
                     className="w-[399px] h-[225px] rounded-lg"
-                    src="https://www.youtube.com/embed/jfKfPfyJRdk"
+                    src="https://www.youtube.com/embed/jfKfPfyJRdk?enablejsapi=1"
                     title="YouTube video player"
                     // frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

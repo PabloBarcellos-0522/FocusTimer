@@ -75,8 +75,8 @@ const SettingsFrame = ({ onClose, values, setters }) => {
             />
             <Toggle
                 label={"Auto Start Pomodoros"}
-                state={values.autoStartToggle}
-                onChange={() => setters.setautoStart(!values.autoStartToggle)}
+                state={values.autoStartPomo}
+                onChange={() => setters.setautoStartPomo(!values.autoStartPomo)}
             />
 
             <br />
