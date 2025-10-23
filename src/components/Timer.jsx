@@ -1,18 +1,15 @@
 import { useState, useEffect } from "react"
 
-const THEME_TIMES = {
-    pomodoro: 25 * 60,
-    short: 5 * 60,
-    long: 15 * 60,
-}
-
 const Timer = ({ theme, isRunning, themeSwap = () => null, times }) => {
-    THEME_TIMES.pomodoro = times.timePomo >= 1 ? times.timePomo * 60 : times.timePomo * 100
-    THEME_TIMES.short = times.timeShort >= 1 ? times.timeShort * 60 : times.timeShort * 100
-    THEME_TIMES.long = times.timeLong >= 1 ? times.timeLong * 60 : times.timeLong * 100
+    const themeTimes = {
+        pomodoro: times.timePomo >= 1 ? times.timePomo * 60 : times.timePomo * 100,
+        short: times.timeShort >= 1 ? times.timeShort * 60 : times.timeShort * 100,
+        long: times.timeLong >= 1 ? times.timeLong * 60 : times.timeLong * 100,
+    }
 
-    const totalTime = THEME_TIMES[theme]
+    const totalTime = themeTimes[theme]
     const [timeLeft, setTimeLeft] = useState(totalTime)
+    const [previusRunning, setpreviusRunning] = useState(false)
 
     // SVG Circle properties
     const radius = 85
@@ -23,7 +20,7 @@ const Timer = ({ theme, isRunning, themeSwap = () => null, times }) => {
     // Reset timer when theme changes
     useEffect(() => {
         setTimeLeft(totalTime)
-    }, [theme, totalTime, times])
+    }, [theme, totalTime])
 
     // Countdown logic
     useEffect(() => {
@@ -33,13 +30,19 @@ const Timer = ({ theme, isRunning, themeSwap = () => null, times }) => {
         }
 
         if (!isRunning) {
+            setpreviusRunning(isRunning)
             return
+        }
+
+        if (previusRunning == false && isRunning == true) {
+            setTimeLeft((prevTime) => prevTime - 1)
         }
 
         const intervalId = setInterval(() => {
             setTimeLeft((prevTime) => prevTime - 1)
         }, 1000)
 
+        setpreviusRunning(isRunning)
         return () => clearInterval(intervalId)
     }, [isRunning, timeLeft])
 

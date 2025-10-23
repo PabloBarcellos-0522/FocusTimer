@@ -111,17 +111,29 @@ function App() {
         if (ThemeSequence < 4 && currentTheme === "pomodoro") {
             setPomodorus(ThemeSequence + 1)
         } else if (currentTheme === "long") {
+            if (!autoStartPomo) {
+                setTimeRunning(false)
+            }
             toggleTheme("pomodoro")
             setPomodorus(1)
         }
 
         if (ThemeSequence >= 4 && currentTheme === "pomodoro") {
+            if (!breakToggle) {
+                setTimeRunning(false)
+            }
             return toggleTheme("long")
         }
 
         if (currentTheme === "pomodoro") {
+            if (!breakToggle) {
+                setTimeRunning(false)
+            }
             toggleTheme("short")
         } else if (currentTheme === "short") {
+            if (!autoStartPomo) {
+                setTimeRunning(false)
+            }
             toggleTheme("pomodoro")
         }
     }
