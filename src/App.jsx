@@ -162,7 +162,12 @@ function App() {
                     />
                 </div>
 
-                <Timer themeSwap={nextTheme} theme={currentTheme} isRunning={timeRunning} />
+                <Timer
+                    themeSwap={nextTheme}
+                    theme={currentTheme}
+                    isRunning={timeRunning}
+                    times={settingsValues}
+                />
 
                 <Button
                     onClick={() => setTimeRunning(!timeRunning)}

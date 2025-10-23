@@ -6,7 +6,11 @@ const THEME_TIMES = {
     long: 15 * 60,
 }
 
-const Timer = ({ theme, isRunning, themeSwap = () => null }) => {
+const Timer = ({ theme, isRunning, themeSwap = () => null, times }) => {
+    THEME_TIMES.pomodoro = times.timePomo >= 1 ? times.timePomo * 60 : times.timePomo * 100
+    THEME_TIMES.short = times.timeShort >= 1 ? times.timeShort * 60 : times.timeShort * 100
+    THEME_TIMES.long = times.timeLong >= 1 ? times.timeLong * 60 : times.timeLong * 100
+
     const totalTime = THEME_TIMES[theme]
     const [timeLeft, setTimeLeft] = useState(totalTime)
 
@@ -19,7 +23,7 @@ const Timer = ({ theme, isRunning, themeSwap = () => null }) => {
     // Reset timer when theme changes
     useEffect(() => {
         setTimeLeft(totalTime)
-    }, [theme, totalTime])
+    }, [theme, totalTime, times])
 
     // Countdown logic
     useEffect(() => {
