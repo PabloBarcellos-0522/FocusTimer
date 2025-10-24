@@ -10,8 +10,8 @@ import MinimalSong from "../src/assets/AlarmSounds/Minimal.mp3"
 import ModernSong from "../src/assets/AlarmSounds/Modern.mp3"
 import NotificationSong from "../src/assets/AlarmSounds/Notification.mp3"
 
-import TickingFast from "../src/assets/TickingSounds/clock-ticking-fast.mp3"
-import TickingSlow from "../src/assets/TickingSounds/ticking-clock_1.mp3"
+import TickingFast from "../src/assets/TickingSounds/clock-ticking-fast1.mp3"
+import TickingSlow from "../src/assets/TickingSounds/ticking-clock.mp3"
 import BlackNoise from "../src/assets/TickingSounds/Black-Noise.mp3"
 import WhiteNoise from "../src/assets/TickingSounds/white-noise.mp3"
 import buttonSoundFile from "../src/assets/ButtonClick.mp3"
@@ -66,8 +66,8 @@ function App() {
     const [autoStartToggleVideo, setautoStartVideo] = useState(false)
     const [autoPauseToggleVideo, setautoPauseVideo] = useState(false)
 
-    const [volume, setVolume] = useState(50)
-    const [volume2, setVolume2] = useState(50)
+    const [volume, setVolume] = useState(100)
+    const [volume2, setVolume2] = useState(5)
 
     const [alarmSound, setAlarmSound] = useState("Ding")
     const [tickingSound, setTickingSound] = useState("Ticking Fast")
