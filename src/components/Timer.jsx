@@ -8,16 +8,28 @@ const Timer = ({
     settingsValues,
     availableAlarmSounds,
     availableTickingSounds,
+    playSound,
 }) => {
     const themeTimes = {
-        pomodoro: times.timePomo >= 1 ? times.timePomo * 60 : times.timePomo * 100,
-        short: times.timeShort >= 1 ? times.timeShort * 60 : times.timeShort * 100,
-        long: times.timeLong >= 1 ? times.timeLong * 60 : times.timeLong * 100,
+        pomodoro:
+            settingsValues.timePomo >= 1
+                ? settingsValues.timePomo * 60
+                : settingsValues.timePomo * 100,
+        short:
+            settingsValues.timeShort >= 1
+                ? settingsValues.timeShort * 60
+                : settingsValues.timeShort * 100,
+        long:
+            settingsValues.timeLong >= 1
+                ? settingsValues.timeLong * 60
+                : settingsValues.timeLong * 100,
     }
 
     const totalTime = themeTimes[theme]
     const [timeLeft, setTimeLeft] = useState(totalTime)
+    const [prevState, setprevState] = useState(null)
     const prevThemeRef = useRef(theme)
+    const tickingSourceRef = useRef(null)
 
     const radius = 85
     const circumference = 2 * Math.PI * radius
@@ -39,46 +51,60 @@ const Timer = ({
     }, [isRunning, timeLeft])
 
     useEffect(() => {
-        const themeChanged = prevThemeRef.current !== theme
-        prevThemeRef.current = theme
+        const tickingSoundName = availableTickingSounds[settingsValues.tickingSound]
 
-        const tickingSound = availableTickingSounds[settingsValues.tickingSound]
-        const alarmSound = availableAlarmSounds[settingsValues.alarmSound]
-
-        if (isRunning) {
-            if (timeLeft > 0) {
-                tickingSound.loop = true
-                tickingSound.volume = settingsValues.volume2 / 100
-                tickingSound.play()
-                if (settingsValues.tickingSound === "TickingS") {
-                    tickingSound.currentTime = 0
-                }
-            } else {
-                tickingSound.pause()
-                if (settingsValues.volume > 5) {
-                    alarmSound.volume = settingsValues.volume / 100
-                    alarmSound.play()
-                }
-                if (!themeChanged) {
-                    setTimeout(themeSwap, 1000)
-                }
+        if (isRunning && timeLeft > 0 && tickingSoundName != "Ticking Slow") {
+            if (!tickingSourceRef.current && settingsValues.volume2 > 5) {
+                const { source } = playSound(tickingSoundName, settingsValues.volume2 / 100, true)
+                tickingSourceRef.current = source
             }
         } else {
-            tickingSound.pause()
+            if (tickingSourceRef.current) {
+                tickingSourceRef.current.stop()
+                tickingSourceRef.current = null
+            }
         }
 
         return () => {
-            tickingSound.pause()
+            if (tickingSourceRef.current) {
+                tickingSourceRef.current.stop()
+                tickingSourceRef.current = null
+            }
         }
-    }, [
-        isRunning,
-        timeLeft,
-        settingsValues,
-        availableTickingSounds,
-        availableAlarmSounds,
-        themeSwap,
-        theme,
-    ])
+    }, [isRunning, settingsValues.tickingSound, playSound, settingsValues.volume2])
+
+    useEffect(() => {
+        const themeChanged = prevThemeRef.current !== theme
+        prevThemeRef.current = theme
+
+        const alarmSoundName = availableAlarmSounds[settingsValues.alarmSound]
+
+        const tickingSoundName = availableTickingSounds[settingsValues.tickingSound]
+        if (
+            timeLeft > 0 &&
+            isRunning &&
+            settingsValues.volume2 > 5 &&
+            tickingSoundName === "Ticking Slow"
+        ) {
+            const { source } = playSound(tickingSoundName, settingsValues.volume2 / 100, false)
+            tickingSourceRef.current = source
+        }
+
+        if (prevState == false && isRunning) {
+            setTimeLeft((t) => t - 1)
+        }
+
+        if (timeLeft <= 0 && isRunning) {
+            if (settingsValues.volume > 5) {
+                playSound(alarmSoundName, settingsValues.volume / 100, false)
+            }
+            if (!themeChanged) {
+                setTimeout(themeSwap, 1000)
+            }
+        }
+
+        setprevState(isRunning)
+    }, [timeLeft, isRunning])
 
     const minutes = Math.floor(timeLeft / 60)
     const seconds = timeLeft % 60
@@ -86,7 +112,6 @@ const Timer = ({
     return (
         <div className="relative w-80 h-80 flex justify-center items-center">
             <svg className="absolute w-full h-full" viewBox="0 0 200 200">
-                {/* Background Circle */}
                 <circle
                     cx="100"
                     cy="100"
@@ -95,7 +120,6 @@ const Timer = ({
                     strokeWidth="10"
                     fill="white"
                 />
-                {/* Progress Circle */}
                 <circle
                     cx="100"
                     cy="100"

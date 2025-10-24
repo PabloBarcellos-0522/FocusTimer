@@ -14,6 +14,42 @@ import TickingFast from "../src/assets/TickingSounds/clock-ticking-fast.mp3"
 import TickingSlow from "../src/assets/TickingSounds/ticking-clock_1.mp3"
 import BlackNoise from "../src/assets/TickingSounds/Black-Noise.mp3"
 import WhiteNoise from "../src/assets/TickingSounds/white-noise.mp3"
+import buttonSoundFile from "../src/assets/ButtonClick.mp3"
+
+let audioContext = null
+const audioBuffers = {}
+
+async function loadAudioFile(url, name) {
+    if (!audioContext) {
+        audioContext = new (window.AudioContext || window.webkitAudioContext)()
+    }
+    try {
+        const response = await fetch(url)
+        const arrayBuffer = await response.arrayBuffer()
+        audioBuffers[name] = await audioContext.decodeAudioData(arrayBuffer)
+        console.log(`${name} loaded and decoded.`)
+    } catch (error) {
+        console.error(`Error loading or decoding ${name}:`, error)
+    }
+}
+
+function playSound(name, volume = 1, loop = false) {
+    if (!audioContext || !audioBuffers[name]) {
+        console.warn(`Audio ${name} not loaded yet!`)
+        return { source: null, gainNode: null }
+    }
+    const source = audioContext.createBufferSource()
+    source.buffer = audioBuffers[name]
+    source.loop = loop
+
+    const gainNode = audioContext.createGain()
+    gainNode.gain.value = volume
+    source.connect(gainNode)
+    gainNode.connect(audioContext.destination)
+
+    source.start(0)
+    return { source, gainNode }
+}
 
 function App() {
     const [currentTheme, switchTheme] = useState("pomodoro")
@@ -65,27 +101,46 @@ function App() {
         setTickingSound,
     }
 
-    const Ding = new Audio(DingSong)
-    const Minimal = new Audio(MinimalSong)
-    const Modern = new Audio(ModernSong)
-    const Notification = new Audio(NotificationSong)
-    const TickingF = new Audio(TickingFast)
-    const TickingS = new Audio(TickingSlow)
-    const BNoise = new Audio(BlackNoise)
-    const WNoise = new Audio(WhiteNoise)
+    useEffect(() => {
+        loadAudioFile(DingSong, "Ding")
+        loadAudioFile(MinimalSong, "Minimal")
+        loadAudioFile(ModernSong, "Modern")
+        loadAudioFile(NotificationSong, "Notification")
+        loadAudioFile(TickingFast, "Ticking Fast")
+        loadAudioFile(TickingSlow, "Ticking Slow")
+        loadAudioFile(BlackNoise, "Black Noise")
+        loadAudioFile(WhiteNoise, "WhiteNoise")
+        loadAudioFile(buttonSoundFile, "ButtonClick")
+
+        const resumeAudioContext = () => {
+            if (audioContext && audioContext.state === "suspended") {
+                audioContext.resume()
+            }
+            document.removeEventListener("click", resumeAudioContext)
+            document.removeEventListener("keydown", resumeAudioContext)
+        }
+
+        document.addEventListener("click", resumeAudioContext)
+        document.addEventListener("keydown", resumeAudioContext)
+
+        return () => {
+            document.removeEventListener("click", resumeAudioContext)
+            document.removeEventListener("keydown", resumeAudioContext)
+        }
+    }, [])
 
     const availableAlarmSounds = {
-        Ding: Ding,
-        Minimal: Minimal,
-        Modern: Modern,
-        Notification: Notification,
+        Ding: "Ding",
+        Minimal: "Minimal",
+        Modern: "Modern",
+        Notification: "Notification",
     }
 
     const availableTickingSounds = {
-        "Ticking Fast": TickingF,
-        "Ticking Slow": TickingS,
-        "Black Noise": BNoise,
-        "White Noise": WNoise,
+        "Ticking Fast": "Ticking Fast",
+        "Ticking Slow": "Ticking Slow",
+        "Black Noise": "Black Noise",
+        "White Noise": "WhiteNoise",
     }
 
     useEffect(() => {
@@ -182,6 +237,8 @@ function App() {
                         isSuperButton
                         text={"Pomodoro"}
                         pressed={currentTheme === "pomodoro"}
+                        playSound={playSound}
+                        volume={settingsValues.volume}
                     />
                     <Button
                         onClick={() => {
@@ -191,6 +248,8 @@ function App() {
                         isSuperButton
                         text={"Short"}
                         pressed={currentTheme === "short"}
+                        playSound={playSound}
+                        volume={settingsValues.volume}
                     />
                     <Button
                         onClick={() => {
@@ -200,6 +259,8 @@ function App() {
                         isSuperButton
                         text={"Long"}
                         pressed={currentTheme === "long"}
+                        playSound={playSound}
+                        volume={settingsValues.volume}
                     />
                 </div>
 
@@ -211,6 +272,7 @@ function App() {
                     settingsValues={settingsValues}
                     availableAlarmSounds={availableAlarmSounds}
                     availableTickingSounds={availableTickingSounds}
+                    playSound={playSound}
                 />
 
                 <Button
@@ -218,12 +280,19 @@ function App() {
                     isSuperButton
                     pressed={timeRunning}
                     text={timeRunning ? "Stop" : "Start"}
+                    playSound={playSound}
+                    volume={settingsValues.volume}
                 />
             </div>
 
             {/* Collum 2: */}
             <div className="flex flex-col items-center">
-                <Button text={"Config"} onClick={() => setSettingsOpen(true)} />
+                <Button
+                    text={"Config"}
+                    onClick={() => setSettingsOpen(true)}
+                    playSound={playSound}
+                    volume={settingsValues.volume}
+                />
                 <iframe
                     id="youtube-player"
                     className="w-[399px] h-[225px] rounded-lg"
@@ -248,6 +317,7 @@ function App() {
                         setters={settingsSetters}
                         availableAlarmSounds={availableAlarmSounds}
                         availableTickingSounds={availableTickingSounds}
+                        playSound={playSound}
                     />
                 </div>
             )}

@@ -1,17 +1,16 @@
-import buttonSoundFile from "../assets/ButtonClick.mp3"
-const ButtonSound = new Audio(buttonSoundFile)
-
 const Button = ({
     onClick = () => null,
     text,
     size = 150,
     isSuperButton = false,
     pressed = false,
+    playSound,
+    volume,
 }) => {
     const press = () => {
-        ButtonSound.currentTime = 0
-        ButtonSound.volume = 1
-        ButtonSound.play()
+        if (playSound) {
+            playSound("ButtonClick", volume / 100)
+        }
         onClick()
     }
 
