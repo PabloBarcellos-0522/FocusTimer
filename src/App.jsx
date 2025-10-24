@@ -5,6 +5,16 @@ import Timer from "./components/Timer.jsx"
 import SettingsFrame from "./components/SettingsFrame.jsx"
 import logo from "../public/FocusTimer Logo.png"
 
+import DingSong from "../src/assets/AlarmSounds/Ding.mp3"
+import MinimalSong from "../src/assets/AlarmSounds/Minimal.mp3"
+import ModernSong from "../src/assets/AlarmSounds/Modern.mp3"
+import NotificationSong from "../src/assets/AlarmSounds/Notification.mp3"
+
+import TickingFast from "../src/assets/TickingSounds/clock-ticking-fast.mp3"
+import TickingSlow from "../src/assets/TickingSounds/ticking-clock_1.mp3"
+import BlackNoise from "../src/assets/TickingSounds/Black-Noise.mp3"
+import WhiteNoise from "../src/assets/TickingSounds/white-noise.mp3"
+
 function App() {
     const [currentTheme, switchTheme] = useState("pomodoro")
     const [timeRunning, setTimeRunning] = useState(false)
@@ -23,6 +33,9 @@ function App() {
     const [volume, setVolume] = useState(50)
     const [volume2, setVolume2] = useState(50)
 
+    const [alarmSound, setAlarmSound] = useState("Ding")
+    const [tickingSound, setTickingSound] = useState("Ticking Fast")
+
     const playerRef = useRef(null)
 
     const settingsValues = {
@@ -35,6 +48,8 @@ function App() {
         autoPauseToggleVideo,
         volume,
         volume2,
+        alarmSound,
+        tickingSound,
     }
     const settingsSetters = {
         setPomo,
@@ -46,6 +61,31 @@ function App() {
         setautoPauseVideo,
         setVolume,
         setVolume2,
+        setAlarmSound,
+        setTickingSound,
+    }
+
+    const Ding = new Audio(DingSong)
+    const Minimal = new Audio(MinimalSong)
+    const Modern = new Audio(ModernSong)
+    const Notification = new Audio(NotificationSong)
+    const TickingF = new Audio(TickingFast)
+    const TickingS = new Audio(TickingSlow)
+    const BNoise = new Audio(BlackNoise)
+    const WNoise = new Audio(WhiteNoise)
+
+    const availableAlarmSounds = {
+        Ding: Ding,
+        Minimal: Minimal,
+        Modern: Modern,
+        Notification: Notification,
+    }
+
+    const availableTickingSounds = {
+        "Ticking Fast": TickingF,
+        "Ticking Slow": TickingS,
+        "Black Noise": BNoise,
+        "White Noise": WNoise,
     }
 
     useEffect(() => {
@@ -108,32 +148,21 @@ function App() {
     }
 
     const nextTheme = () => {
-        if (ThemeSequence < 4 && currentTheme === "pomodoro") {
-            setPomodorus(ThemeSequence + 1)
-        } else if (currentTheme === "long") {
-            if (!autoStartPomo) {
-                setTimeRunning(false)
-            }
-            toggleTheme("pomodoro")
-            setPomodorus(1)
-        }
-
-        if (ThemeSequence >= 4 && currentTheme === "pomodoro") {
-            if (!breakToggle) {
-                setTimeRunning(false)
-            }
-            return toggleTheme("long")
-        }
-
         if (currentTheme === "pomodoro") {
-            if (!breakToggle) {
-                setTimeRunning(false)
+            if (ThemeSequence >= 4) {
+                // Long break
+                if (!breakToggle) setTimeRunning(false)
+                toggleTheme("long")
+                setPomodorus(1) // Reset for next cycle
+            } else {
+                // Short break
+                if (!breakToggle) setTimeRunning(false)
+                toggleTheme("short")
+                setPomodorus(ThemeSequence + 1)
             }
-            toggleTheme("short")
-        } else if (currentTheme === "short") {
-            if (!autoStartPomo) {
-                setTimeRunning(false)
-            }
+        } else {
+            // short or long break finished
+            if (!autoStartPomo) setTimeRunning(false)
             toggleTheme("pomodoro")
         }
     }
@@ -179,6 +208,9 @@ function App() {
                     theme={currentTheme}
                     isRunning={timeRunning}
                     times={settingsValues}
+                    settingsValues={settingsValues}
+                    availableAlarmSounds={availableAlarmSounds}
+                    availableTickingSounds={availableTickingSounds}
                 />
 
                 <Button
@@ -214,6 +246,8 @@ function App() {
                         onClose={() => setSettingsOpen(false)}
                         values={settingsValues}
                         setters={settingsSetters}
+                        availableAlarmSounds={availableAlarmSounds}
+                        availableTickingSounds={availableTickingSounds}
                     />
                 </div>
             )}

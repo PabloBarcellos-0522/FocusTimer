@@ -4,7 +4,13 @@ import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
 import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
 
-const SettingsFrame = ({ onClose, values, setters }) => {
+const SettingsFrame = ({
+    onClose,
+    values,
+    setters,
+    availableAlarmSounds,
+    availableTickingSounds,
+}) => {
     const settingsRef = useRef(null)
 
     useEffect(() => {
@@ -20,18 +26,14 @@ const SettingsFrame = ({ onClose, values, setters }) => {
         }
     }, [onClose])
 
-    const availableAlarmSounds = [
-        { value: "src/assets/AlarmSounds/Ding.mp3", label: "Ding" },
-        { value: "src/assets/AlarmSounds/Minimal.mp3", label: "Minimal" },
-        { value: "src/assets/AlarmSounds/Modern.mp3", label: "Modern" },
-        { value: "src/assets/AlarmSounds/Notification.mp3", label: "Notification" },
-    ]
-    const availableTickingSounds = [
-        { value: "src/assets/TickingSounds/clock-ticking-fast.mp3", label: "Ticking Fast" },
-        { value: "src/assets/TickingSounds/ticking-clock_1.mp3", label: "Ticking Slow" },
-        { value: "src/assets/TickingSounds/Black-Noise.mp3", label: "Black Noise" },
-        { value: "src/assets/TickingSounds/white-noise.mp3", label: "White Noise" },
-    ]
+    const alarmSoundOptions = Object.keys(availableAlarmSounds).map((key) => ({
+        value: key,
+        label: key,
+    }))
+    const tickingSoundOptions = Object.keys(availableTickingSounds).map((key) => ({
+        value: key,
+        label: key,
+    }))
 
     return (
         <div
@@ -105,12 +107,22 @@ const SettingsFrame = ({ onClose, values, setters }) => {
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
 
             <br />
-            <SoundSelect options={availableAlarmSounds} label={"Alarm Sound"} />
+            <SoundSelect
+                label={"Alarm Sound"}
+                options={alarmSoundOptions}
+                value={values.alarmSound}
+                onChange={(e) => setters.setAlarmSound(e.target.value)}
+            />
             <SliderInput
                 value={values.volume}
                 onChange={() => setters.setVolume(event.target.value)}
             />
-            <SoundSelect options={availableTickingSounds} label={"Ticking Sound"} />
+            <SoundSelect
+                label={"Ticking Sound"}
+                options={tickingSoundOptions}
+                value={values.tickingSound}
+                onChange={(e) => setters.setTickingSound(e.target.value)}
+            />
             <SliderInput
                 value={values.volume2}
                 onChange={() => setters.setVolume2(event.target.value)}

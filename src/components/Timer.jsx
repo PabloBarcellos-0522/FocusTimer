@@ -1,6 +1,14 @@
-import { useState, useEffect } from "react"
+import { useState, useEffect, useRef } from "react"
 
-const Timer = ({ theme, isRunning, themeSwap = () => null, times }) => {
+const Timer = ({
+    theme,
+    isRunning,
+    themeSwap = () => null,
+    times,
+    settingsValues,
+    availableAlarmSounds,
+    availableTickingSounds,
+}) => {
     const themeTimes = {
         pomodoro: times.timePomo >= 1 ? times.timePomo * 60 : times.timePomo * 100,
         short: times.timeShort >= 1 ? times.timeShort * 60 : times.timeShort * 100,
@@ -9,42 +17,68 @@ const Timer = ({ theme, isRunning, themeSwap = () => null, times }) => {
 
     const totalTime = themeTimes[theme]
     const [timeLeft, setTimeLeft] = useState(totalTime)
-    const [previusRunning, setpreviusRunning] = useState(false)
+    const prevThemeRef = useRef(theme)
 
-    // SVG Circle properties
     const radius = 85
     const circumference = 2 * Math.PI * radius
     const progress = (timeLeft / totalTime) * 100
     const offset = circumference - (progress / 100) * circumference
 
-    // Reset timer when theme changes
     useEffect(() => {
         setTimeLeft(totalTime)
     }, [theme, totalTime])
 
-    // Countdown logic
     useEffect(() => {
-        if (isRunning && timeLeft <= 0) {
-            setTimeout(themeSwap, 1000)
+        if (!isRunning || timeLeft <= 0) {
             return
         }
-
-        if (!isRunning) {
-            setpreviusRunning(isRunning)
-            return
-        }
-
-        if (previusRunning == false && isRunning == true) {
-            setTimeLeft((prevTime) => prevTime - 1)
-        }
-
         const intervalId = setInterval(() => {
-            setTimeLeft((prevTime) => prevTime - 1)
+            setTimeLeft((t) => t - 1)
         }, 1000)
-
-        setpreviusRunning(isRunning)
         return () => clearInterval(intervalId)
     }, [isRunning, timeLeft])
+
+    useEffect(() => {
+        const themeChanged = prevThemeRef.current !== theme
+        prevThemeRef.current = theme
+
+        const tickingSound = availableTickingSounds[settingsValues.tickingSound]
+        const alarmSound = availableAlarmSounds[settingsValues.alarmSound]
+
+        if (isRunning) {
+            if (timeLeft > 0) {
+                tickingSound.loop = true
+                tickingSound.volume = settingsValues.volume2 / 100
+                tickingSound.play()
+                if (settingsValues.tickingSound === "TickingS") {
+                    tickingSound.currentTime = 0
+                }
+            } else {
+                tickingSound.pause()
+                if (settingsValues.volume > 5) {
+                    alarmSound.volume = settingsValues.volume / 100
+                    alarmSound.play()
+                }
+                if (!themeChanged) {
+                    setTimeout(themeSwap, 1000)
+                }
+            }
+        } else {
+            tickingSound.pause()
+        }
+
+        return () => {
+            tickingSound.pause()
+        }
+    }, [
+        isRunning,
+        timeLeft,
+        settingsValues,
+        availableTickingSounds,
+        availableAlarmSounds,
+        themeSwap,
+        theme,
+    ])
 
     const minutes = Math.floor(timeLeft / 60)
     const seconds = timeLeft % 60
