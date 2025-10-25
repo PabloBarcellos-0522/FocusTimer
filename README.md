@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PabloBarcellos-0522/FocusTimer?color=blue)
 
 <div align="center">
-  <img src="./public/FocusTimer%20Logo.png" alt="FocusTimer Logo" width="300px"/>
+  <img src="https://raw.githubusercontent.com/PabloBarcellos-0522/FocusTimer/main/public/FocusTimer%20Logo.png" alt="FocusTimer Logo" width="300px"/>
 </div>
 
 <p align="center">
@@ -23,6 +23,8 @@
 
 ---
 
+<br/>
+
 ## 🎨 Design Process
 
 The visual identity and user experience of FocusTimer were carefully planned before implementation. The goal was to create a clean, modern, and intuitive interface that helps the user stay focused.
@@ -31,6 +33,8 @@ The visual identity and user experience of FocusTimer were carefully planned bef
     -   _(You can add a link to your Excalidraw sketches or images here)_
 -   **Polished Design (UI/UX)**: A more detailed and high-fidelity design was created in **Figma**, serving as the definitive guide for colors, typography, and component styling.
     -   **Design: [Access the Figma design here](http://www.figma.com/design/ojIinc4QpL39jAhtpazVkt)**
+
+<br/>
 
 ## ✨ Key Features
 
@@ -57,6 +61,8 @@ FocusTimer is not just a simple timer; it's a complete tool to manage your work 
     -   Option to automatically start the next Pomodoro after a break.
 -   **Responsive Design**: The interface is designed to be pleasant and functional on different screen sizes.
 
+<br/>
+
 ## 🚀 Technologies Used
 
 This project was built using modern web development technologies to ensure performance, scalability, and a great developer experience.
@@ -71,6 +77,8 @@ This project was built using modern web development technologies to ensure perfo
     -   [**gh-pages**](https://www.npmjs.com/package/gh-pages): A simple way to deploy the application to GitHub Pages.
 -   **Code Quality**:
     -   [**ESLint**](https://eslint.org/): For identifying and fixing problems in the JavaScript code.
+
+<br/>
 
 ## 📂 Project Structure
 
@@ -99,6 +107,8 @@ The project is organized into a clear and logical folder structure:
 └── vite.config.js        # Vite configuration
 ```
 
+<br/>
+
 ## ⚙️ Getting Started
 
 To run this project locally, follow the steps below:
@@ -121,6 +131,8 @@ To run this project locally, follow the steps below:
     npm run dev
     ```
     The application will be available at `http://localhost:5173` (or another port if 5173 is in use).
+
+<br/>
 
 ## 📦 Deployment
 
