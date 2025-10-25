@@ -80,6 +80,8 @@ function App() {
 
     const playerRef = useRef(null)
 
+    const [tasks, setTasks] = useState(savedSettings?.tasks ?? [])
+
     const settingsValues = {
         timePomo,
         timeShort,
@@ -92,6 +94,7 @@ function App() {
         volume2,
         alarmSound,
         tickingSound,
+        tasks,
     }
     const settingsSetters = {
         setPomo,
@@ -105,6 +108,7 @@ function App() {
         setVolume2,
         setAlarmSound,
         setTickingSound,
+        setTasks,
     }
 
     useEffect(() => {
@@ -316,7 +320,7 @@ function App() {
                     <label className="font-bold text-white">Tasks</label>
                     <hr className="border-white mt-1 border-2" />
                 </div>
-                <TaskManager />
+                <TaskManager tasks={tasks} setTasks={setTasks} />
             </div>
 
             {isSettingsOpen && (

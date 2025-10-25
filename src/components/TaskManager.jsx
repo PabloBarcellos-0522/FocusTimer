@@ -1,14 +1,8 @@
 import { useRef, useState } from "react"
 import Task from "./Task.jsx"
 
-const TaskManager = () => {
+const TaskManager = ({ tasks, setTasks }) => {
     const nesxtId = useRef(0)
-
-    const [tasks, setTasks] = useState([
-        // { id: 1, text: "Fazer café", isCompleted: false },
-        // { id: 2, text: "Estudar React", isCompleted: true },
-        // { id: 3, text: "Ir para a academia", isCompleted: false },
-    ])
 
     const handleToggleComplete = (taskId) => {
         setTasks((currentTasks) =>
