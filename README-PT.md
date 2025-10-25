@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PabloBarcellos-0522/FocusTimer?color=blue)
 
 <div align="center">
-  <img src="./public/FocusTimer%20Logo.png" alt="Logo do FocusTimer" width="300px"/>
+  <img src="https://raw.githubusercontent.com/PabloBarcellos-0522/FocusTimer/main/public/FocusTimer%20Logo.png" alt="Logo do FocusTimer" width="300px"/>
 </div>
 
 <p align="center">
@@ -18,6 +18,8 @@
 
 ---
 
+<br/>
+
 ## 🎨 Processo de Design
 
 A identidade visual e a experiência do usuário do FocusTimer foram cuidadosamente planejadas antes da implementação. O objetivo era criar uma interface limpa, moderna e intuitiva que ajude o usuário a se manter focado.
@@ -26,6 +28,8 @@ A identidade visual e a experiência do usuário do FocusTimer foram cuidadosame
     -   *(Você pode adicionar um link para seus esboços ou imagens do Excalidraw aqui)*
 -   **Design Polido (UI/UX)**: Um design mais detalhado e de alta fidelidade foi criado no **Figma**, servindo como o guia definitivo para cores, tipografia e estilo dos componentes.
     -   **Design: [Acesse o design no Figma aqui](http://www.figma.com/design/ojIinc4QpL39jAhtpazVkt)**
+
+<br/>
 
 ## ✨ Principais Funcionalidades
 
@@ -52,6 +56,8 @@ O FocusTimer não é apenas um simples cronômetro; é uma ferramenta completa p
     -   Opção para iniciar o próximo Pomodoro automaticamente após uma pausa.
 -   **Design Responsivo**: A interface foi projetada para ser agradável e funcional em diferentes tamanhos de tela.
 
+<br/>
+
 ## 🚀 Tecnologias Utilizadas
 
 Este projeto foi construído com tecnologias modernas de desenvolvimento web para garantir desempenho, escalabilidade e uma ótima experiência de desenvolvimento.
@@ -66,6 +72,8 @@ Este projeto foi construído com tecnologias modernas de desenvolvimento web par
     -   [**gh-pages**](https://www.npmjs.com/package/gh-pages): Uma maneira simples de implantar a aplicação no GitHub Pages.
 -   **Qualidade de Código**:
     -   [**ESLint**](https://eslint.org/): Para identificar e corrigir problemas no código JavaScript.
+
+<br/>
 
 ## 📂 Estrutura do Projeto
 
@@ -94,6 +102,8 @@ O projeto está organizado em uma estrutura de pastas clara e lógica:
 └── vite.config.js        # Configuração do Vite
 ```
 
+<br/>
+
 ## ⚙️ Como Executar o Projeto
 
 Para executar este projeto localmente, siga os passos abaixo:
@@ -116,6 +126,8 @@ Para executar este projeto localmente, siga os passos abaixo:
     npm run dev
     ```
     A aplicação estará disponível em `http://localhost:5173` (ou outra porta, se a 5173 estiver em uso).
+
+<br/>
 
 ## 📦 Implantação (Deploy)
 
