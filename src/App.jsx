@@ -52,25 +52,31 @@ function playSound(name, volume = 1, loop = false) {
 }
 
 function App() {
+    const savedSettings = JSON.parse(localStorage.getItem("focusTimerSettings"))
+
     const [currentTheme, switchTheme] = useState("pomodoro")
     const [timeRunning, setTimeRunning] = useState(false)
     const [ThemeSequence, setPomodorus] = useState(1)
     const [isSettingsOpen, setSettingsOpen] = useState(false)
 
-    const [timePomo, setPomo] = useState(25)
-    const [timeShort, setShort] = useState(5)
-    const [timeLong, setLong] = useState(15)
+    const [timePomo, setPomo] = useState(savedSettings?.timePomo ?? 25)
+    const [timeShort, setShort] = useState(savedSettings?.timeShort ?? 5)
+    const [timeLong, setLong] = useState(savedSettings?.timeLong ?? 15)
 
-    const [breakToggle, setBreak] = useState(false)
-    const [autoStartPomo, setautoStartPomo] = useState(true)
-    const [autoStartToggleVideo, setautoStartVideo] = useState(false)
-    const [autoPauseToggleVideo, setautoPauseVideo] = useState(false)
+    const [breakToggle, setBreak] = useState(savedSettings?.breakToggle ?? false)
+    const [autoStartPomo, setautoStartPomo] = useState(savedSettings?.autoStartPomo ?? true)
+    const [autoStartToggleVideo, setautoStartVideo] = useState(
+        savedSettings?.autoStartToggleVideo ?? false
+    )
+    const [autoPauseToggleVideo, setautoPauseVideo] = useState(
+        savedSettings?.autoPauseToggleVideo ?? false
+    )
 
-    const [volume, setVolume] = useState(100)
-    const [volume2, setVolume2] = useState(5)
+    const [volume, setVolume] = useState(savedSettings?.volume ?? 95)
+    const [volume2, setVolume2] = useState(savedSettings?.volume2 ?? 5)
 
-    const [alarmSound, setAlarmSound] = useState("Ding")
-    const [tickingSound, setTickingSound] = useState("Ticking Fast")
+    const [alarmSound, setAlarmSound] = useState(savedSettings?.alarmSound ?? "Ding")
+    const [tickingSound, setTickingSound] = useState(savedSettings?.tickingSound ?? "Ticking Fast")
 
     const playerRef = useRef(null)
 
@@ -100,6 +106,10 @@ function App() {
         setAlarmSound,
         setTickingSound,
     }
+
+    useEffect(() => {
+        localStorage.setItem("focusTimerSettings", JSON.stringify(settingsValues))
+    }, [settingsValues])
 
     useEffect(() => {
         loadAudioFile(DingSong, "Ding")
