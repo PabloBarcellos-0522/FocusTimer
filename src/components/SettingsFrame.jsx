@@ -11,6 +11,8 @@ const SettingsFrame = ({
     setters,
     availableAlarmSounds,
     availableTickingSounds,
+    isRunning,
+    setTimeRunning,
 }) => {
     const settingsRef = useRef(null)
 
@@ -70,19 +72,34 @@ const SettingsFrame = ({
                 <TimeInput
                     label={"Pomodoro"}
                     value={values.timePomo}
-                    onChange={(newValue) => setters.setPomo(newValue)}
+                    onChange={(newValue) => {
+                        if (isRunning) {
+                            setTimeRunning(false)
+                        }
+                        setters.setPomo(newValue)
+                    }}
                 />
 
                 <TimeInput
                     label={"Short Break"}
                     value={values.timeShort}
-                    onChange={(newValue) => setters.setShort(newValue)}
+                    onChange={(newValue) => {
+                        if (isRunning) {
+                            setTimeRunning(false)
+                        }
+                        setters.setShort(newValue)
+                    }}
                 />
 
                 <TimeInput
                     label={"Long Break"}
                     value={values.timeLong}
-                    onChange={(newValue) => setters.setLong(newValue)}
+                    onChange={(newValue) => {
+                        if (isRunning) {
+                            setTimeRunning(false)
+                        }
+                        setters.setLong(newValue)
+                    }}
                 />
             </div>
             <br />

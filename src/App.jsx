@@ -338,6 +338,8 @@ function App() {
                         availableAlarmSounds={availableAlarmSounds}
                         availableTickingSounds={availableTickingSounds}
                         playSound={playSound}
+                        isRunning={timeRunning}
+                        setTimeRunning={setTimeRunning}
                     />
                 </div>
             )}
