@@ -67,7 +67,15 @@ const Timer = ({
         }, 250) // Check 4 times per second for better accuracy
 
         return () => clearInterval(intervalId)
-    }, [isRunning, theme, settingsValues.alarmSound, settingsValues.volume, playSound, themeSwap, availableAlarmSounds])
+    }, [
+        isRunning,
+        theme,
+        settingsValues.alarmSound,
+        settingsValues.volume,
+        playSound,
+        themeSwap,
+        availableAlarmSounds,
+    ])
 
     // This effect handles the continuous ticking sounds.
     useEffect(() => {
@@ -91,12 +99,27 @@ const Timer = ({
                 tickingSourceRef.current = null
             }
         }
-    }, [isRunning, settingsValues.tickingSound, playSound, settingsValues.volume2, availableTickingSounds, theme])
+    }, [
+        isRunning,
+        settingsValues.tickingSound,
+        playSound,
+        settingsValues.volume2,
+        availableTickingSounds,
+        theme,
+    ])
 
     // This separate effect handles the once-per-second "Ticking Slow" sound.
     useEffect(() => {
+        document.title = `${String(Math.floor(timeLeft / 60)).padStart(2, "0")}:${String(
+            timeLeft % 60
+        ).padStart(2, "0")} - Focus Timer`
         const tickingSoundName = availableTickingSounds[settingsValues.tickingSound]
-        if (isRunning && timeLeft > 0 && settingsValues.volume2 > 5 && tickingSoundName === "Ticking Slow") {
+        if (
+            isRunning &&
+            timeLeft > 0 &&
+            settingsValues.volume2 > 5 &&
+            tickingSoundName === "Ticking Slow"
+        ) {
             playSound(tickingSoundName, settingsValues.volume2 / 100, false)
         }
     }, [timeLeft]) // Relies on timeLeft changing every second
