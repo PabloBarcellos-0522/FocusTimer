@@ -82,6 +82,10 @@ function App() {
 
     const [tasks, setTasks] = useState(savedSettings?.tasks ?? [])
 
+    const [videoUrl, setVideoUrl] = useState(
+        savedSettings?.videoUrl ?? "https://www.youtube.com/embed/jfKfPfyJRdk?enablejsapi=1"
+    )
+
     const settingsValues = {
         timePomo,
         timeShort,
@@ -95,6 +99,7 @@ function App() {
         alarmSound,
         tickingSound,
         tasks,
+        videoUrl,
     }
     const settingsSetters = {
         setPomo,
@@ -109,6 +114,7 @@ function App() {
         setAlarmSound,
         setTickingSound,
         setTasks,
+        setVideoUrl,
     }
 
     useEffect(() => {
@@ -310,7 +316,7 @@ function App() {
                 <iframe
                     id="youtube-player"
                     className="w-[399px] h-[225px] rounded-lg"
-                    src="https://www.youtube.com/embed/jfKfPfyJRdk?enablejsapi=1"
+                    src={videoUrl}
                     title="YouTube video player"
                     // frameBorder="0"
                     allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"

@@ -3,6 +3,7 @@ import TimeInput from "./SettingsInputs/TimeInput.jsx"
 import Toggle from "./SettingsInputs/Toggle.jsx"
 import SliderInput from "./SettingsInputs/SliderInput.jsx"
 import SoundSelect from "./SettingsInputs/SoundSelect.jsx"
+import UrlInput from "./SettingsInputs/UrlInput.jsx"
 
 const SettingsFrame = ({
     onClose,
@@ -60,14 +61,11 @@ const SettingsFrame = ({
                 </svg>
             </button>
             <h2 className="text-2xl font-bold text-white mb-4">Settings</h2>
-
             {/* Content of the settings will go here */}
-
             <div className="w-full">
                 <hr className="border-white mt-1 border-1" />
             </div>
             <h1 className="text-theme-text text-xl w-full m-3">Timer (Minutes)</h1>
-
             <div className="flex gap-5">
                 <TimeInput
                     label={"Pomodoro"}
@@ -87,7 +85,6 @@ const SettingsFrame = ({
                     onChange={(newValue) => setters.setLong(newValue)}
                 />
             </div>
-
             <br />
             <Toggle
                 label={"Auto Start Breaks"}
@@ -99,13 +96,11 @@ const SettingsFrame = ({
                 state={values.autoStartPomo}
                 onChange={() => setters.setautoStartPomo(!values.autoStartPomo)}
             />
-
             <br />
             <div className="w-full">
                 <hr className="border-white mt-1 border-1" />
             </div>
             <h1 className="text-theme-text text-xl w-full m-3">Mídia</h1>
-
             <br />
             <SoundSelect
                 label={"Alarm Sound"}
@@ -126,6 +121,12 @@ const SettingsFrame = ({
             <SliderInput
                 value={values.volume2}
                 onChange={() => setters.setVolume2(event.target.value)}
+            />
+
+            <UrlInput
+                label={"URL"}
+                videoUrl={values.videoUrl}
+                onChange={(newUrl) => setters.setVideoUrl(newUrl)}
             />
 
             <Toggle
