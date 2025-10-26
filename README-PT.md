@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PabloBarcellos-0522/FocusTimer?color=blue)
 
 <div align="center">
-  <img src="public/FocusTimer%20Logo.png" alt="FocusTimer Logo" width="300">
+  <img src="public/FocusTimer-Logo.png" alt="FocusTimer Logo" width="300">
 </div>
 
 <p align="center">
@@ -25,7 +25,7 @@
 A identidade visual e a experiência do usuário do FocusTimer foram cuidadosamente planejadas antes da implementação. O objetivo era criar uma interface limpa, moderna e intuitiva que ajude o usuário a se manter focado.
 
 -   **Esboços Iniciais**: As primeiras ideias e layouts foram rascunhados usando **Excalidraw**, permitindo uma rápida exploração de diferentes estruturas e componentes.
-    -   *(Você pode adicionar um link para seus esboços ou imagens do Excalidraw aqui)*
+    -   _(Você pode adicionar um link para seus esboços ou imagens do Excalidraw aqui)_
 -   **Design Polido (UI/UX)**: Um design mais detalhado e de alta fidelidade foi criado no **Figma**, servindo como o guia definitivo para cores, tipografia e estilo dos componentes.
     -   **Design: [Acesse o design no Figma aqui](http://www.figma.com/design/ojIinc4QpL39jAhtpazVkt)**
 

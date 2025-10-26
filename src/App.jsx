@@ -3,7 +3,7 @@ import Button from "./components/Button.jsx"
 import TaskManager from "./components/TaskManager.jsx"
 import Timer from "./components/Timer.jsx"
 import SettingsFrame from "./components/SettingsFrame.jsx"
-import logo from "../public/FocusTimer Logo.png"
+import logo from "../public/FocusTimer-Logo.png"
 
 import DingSong from "../src/assets/AlarmSounds/Ding.mp3"
 import MinimalSong from "../src/assets/AlarmSounds/Minimal.mp3"

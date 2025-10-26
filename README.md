@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PabloBarcellos-0522/FocusTimer?color=blue)
 
 <div align="center">
-  <img src="public/FocusTimer%20Logo.png" alt="FocusTimer Logo" width="300">
+  <img src="public/FocusTimer-Logo.png" alt="FocusTimer Logo" width="300">
 </div>
 
 <p align="center">
@@ -15,7 +15,8 @@
 ---
 
 **Translations:**
-* [Português (Brasil)](./README-PT.md)
+
+-   [Português (Brasil)](./README-PT.md)
 
 ---
 
