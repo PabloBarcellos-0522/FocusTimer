@@ -5,7 +5,7 @@
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/PabloBarcellos-0522/FocusTimer?color=blue)
 
 <div align="center">
-  <img src="https://raw.githubusercontent.com/PabloBarcellos-0522/FocusTimer/main/public/FocusTimer%20Logo.png" alt="Logo do FocusTimer" width="300px"/>
+  <img src="public/FocusTimer%20Logo.png" alt="FocusTimer Logo" width="300">
 </div>
 
 <p align="center">
