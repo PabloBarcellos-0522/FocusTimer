@@ -5,6 +5,7 @@ import TaskManager from "./components/TaskManager.jsx"
 import Timer from "./components/Timer.jsx"
 import SettingsFrame from "./components/SettingsFrame.jsx"
 import logo from "../public/FocusTimer-Logo.png"
+import { initLenis, destroyLenis } from "./lenis.js"
 
 import DingSong from "../src/assets/AlarmSounds/Ding.mp3"
 import MinimalSong from "../src/assets/AlarmSounds/Minimal.mp3"
@@ -176,11 +177,14 @@ function App() {
 
     useEffect(() => {
         if (isSettingsOpen) {
+            destroyLenis()
             document.body.style.overflow = "hidden"
         } else {
+            initLenis()
             document.body.style.overflow = "unset"
         }
         return () => {
+            initLenis()
             document.body.style.overflow = "unset"
         }
     }, [isSettingsOpen])
