@@ -1,4 +1,5 @@
 import { useState, useEffect, useRef } from "react"
+import PomodoroInfo from "./components/PomodoroInfo.jsx"
 import Button from "./components/Button.jsx"
 import TaskManager from "./components/TaskManager.jsx"
 import Timer from "./components/Timer.jsx"
@@ -244,105 +245,110 @@ function App() {
 
     return (
         <>
-            <div className="flex flex-col items-center">
-                <div className="w-48 h-[60px] bg-theme-text mt-5 rounded-md flex items-center cursor-pointer">
-                    <img src={logo} alt="FocusTimer Logo" />
-                </div>
-                <div className="flex">
-                    <Button
-                        onClick={() => {
-                            toggleTheme("pomodoro")
-                            setTimeRunning(false)
-                        }}
-                        isSuperButton
-                        text={"Pomodoro"}
-                        pressed={currentTheme === "pomodoro"}
-                        playSound={playSound}
-                        volume={settingsValues.volume}
-                    />
-                    <Button
-                        onClick={() => {
-                            toggleTheme("short")
-                            setTimeRunning(false)
-                        }}
-                        isSuperButton
-                        text={"Short"}
-                        pressed={currentTheme === "short"}
-                        playSound={playSound}
-                        volume={settingsValues.volume}
-                    />
-                    <Button
-                        onClick={() => {
-                            toggleTheme("long")
-                            setTimeRunning(false)
-                        }}
-                        isSuperButton
-                        text={"Long"}
-                        pressed={currentTheme === "long"}
-                        playSound={playSound}
-                        volume={settingsValues.volume}
-                    />
-                </div>
+            <main className="min-h-screen flex justify-center items-start gap-8 p-4">
+                <div className="flex flex-col items-center">
+                    <div className="w-48 h-[60px] bg-theme-text mt-5 rounded-md flex items-center cursor-pointer">
+                        <img src={logo} alt="FocusTimer Logo" />
+                    </div>
+                    <div className="flex">
+                        <Button
+                            onClick={() => {
+                                toggleTheme("pomodoro")
+                                setTimeRunning(false)
+                            }}
+                            isSuperButton
+                            text={"Pomodoro"}
+                            pressed={currentTheme === "pomodoro"}
+                            playSound={playSound}
+                            volume={settingsValues.volume}
+                        />
+                        <Button
+                            onClick={() => {
+                                toggleTheme("short")
+                                setTimeRunning(false)
+                            }}
+                            isSuperButton
+                            text={"Short"}
+                            pressed={currentTheme === "short"}
+                            playSound={playSound}
+                            volume={settingsValues.volume}
+                        />
+                        <Button
+                            onClick={() => {
+                                toggleTheme("long")
+                                setTimeRunning(false)
+                            }}
+                            isSuperButton
+                            text={"Long"}
+                            pressed={currentTheme === "long"}
+                            playSound={playSound}
+                            volume={settingsValues.volume}
+                        />
+                    </div>
 
-                <Timer
-                    themeSwap={nextTheme}
-                    theme={currentTheme}
-                    isRunning={timeRunning}
-                    times={settingsValues}
-                    settingsValues={settingsValues}
-                    availableAlarmSounds={availableAlarmSounds}
-                    availableTickingSounds={availableTickingSounds}
-                    playSound={playSound}
-                />
-
-                <Button
-                    onClick={() => setTimeRunning(!timeRunning)}
-                    isSuperButton
-                    pressed={timeRunning}
-                    text={timeRunning ? "Stop" : "Start"}
-                    playSound={playSound}
-                    volume={settingsValues.volume}
-                />
-            </div>
-
-            {/* Collum 2: */}
-            <div className="flex flex-col items-center">
-                <Button
-                    text={"Config"}
-                    onClick={() => setSettingsOpen(true)}
-                    playSound={playSound}
-                    volume={settingsValues.volume}
-                />
-                <iframe
-                    id="youtube-player"
-                    className="w-[399px] h-[225px] rounded-lg"
-                    src={videoUrl}
-                    title="YouTube video player"
-                    // frameBorder="0"
-                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                    allowFullScreen
-                ></iframe>
-                <div className="w-[400px] mt-4">
-                    <label className="font-bold text-white">Tasks</label>
-                    <hr className="border-white mt-1 border-2" />
-                </div>
-                <TaskManager tasks={tasks} setTasks={setTasks} />
-            </div>
-
-            {isSettingsOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start overflow-y-auto no-scrollbar z-10 py-14">
-                    <SettingsFrame
-                        onClose={() => setSettingsOpen(false)}
-                        values={settingsValues}
-                        setters={settingsSetters}
+                    <Timer
+                        themeSwap={nextTheme}
+                        theme={currentTheme}
+                        isRunning={timeRunning}
+                        times={settingsValues}
+                        settingsValues={settingsValues}
                         availableAlarmSounds={availableAlarmSounds}
                         availableTickingSounds={availableTickingSounds}
                         playSound={playSound}
-                        isRunning={timeRunning}
-                        setTimeRunning={setTimeRunning}
+                    />
+
+                    <Button
+                        onClick={() => setTimeRunning(!timeRunning)}
+                        isSuperButton
+                        pressed={timeRunning}
+                        text={timeRunning ? "Stop" : "Start"}
+                        playSound={playSound}
+                        volume={settingsValues.volume}
                     />
                 </div>
-            )}
+
+                {/* Collum 2: */}
+                <div className="flex flex-col items-center">
+                    <Button
+                        text={"Config"}
+                        onClick={() => setSettingsOpen(true)}
+                        playSound={playSound}
+                        volume={settingsValues.volume}
+                    />
+                    <iframe
+                        id="youtube-player"
+                        className="w-[399px] h-[225px] rounded-lg"
+                        src={videoUrl}
+                        title="YouTube video player"
+                        // frameBorder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowFullScreen
+                    ></iframe>
+                    <div className="w-[400px] mt-4">
+                        <label className="font-bold text-white">Tasks</label>
+                        <hr className="border-white mt-1 border-2" />
+                    </div>
+                    <TaskManager tasks={tasks} setTasks={setTasks} />
+                </div>
+
+                {isSettingsOpen && (
+                    <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-start overflow-y-auto no-scrollbar z-10 py-14">
+                        <SettingsFrame
+                            onClose={() => setSettingsOpen(false)}
+                            values={settingsValues}
+                            setters={settingsSetters}
+                            availableAlarmSounds={availableAlarmSounds}
+                            availableTickingSounds={availableTickingSounds}
+                            playSound={playSound}
+                            isRunning={timeRunning}
+                            setTimeRunning={setTimeRunning}
+                        />
+                    </div>
+                )}
+            </main>
+            <footer className="w-full flex justify-center bg-theme-background p-8">
+                <PomodoroInfo />
+            </footer>
         </>
     )
 }
