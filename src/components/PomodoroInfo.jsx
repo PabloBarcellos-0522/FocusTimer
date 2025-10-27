@@ -1,14 +1,24 @@
+import image1 from "/public/Pomodoro-image1.jpeg"
+import image2 from "/public/How-the-Pomodoro-Technique-Works.jpg"
+import image3 from "/public/Pomodoro-on-work.jpeg"
+
 const PomodoroInfo = () => {
     return (
         <div className="w-full max-w-4xl mx-auto p-8 text-theme-text-secundary mt-10">
-            <h1 className="text-4xl font-bold text-center mb-6 text-theme-primary">
+            <h2 className="text-4xl font-bold text-center mb-6 text-theme-primary">
                 Técnica Pomodoro: como gerenciar seu tempo e ser mais produtivo
-            </h1>
+            </h2>
             <div className="text-lg space-y-4">
                 <p>
                     Conheça um sistema de gerenciamento de tempo famoso internacionalmente e escrito
                     por Francesco Cirillo, pai da Técnica Pomodoro.
                 </p>
+
+                <div className="flex justify-center">
+                    <img src={image1} width={500} alt="" srcset="" className="rounded-sm" />
+                </div>
+                <br />
+
                 <p>
                     Você sabia que uma das estratégias de produtividade mais famosas do mundo surgiu
                     a partir de um tomate e algum tempo na cozinha? Vamos te contar tudo sobre a
@@ -27,9 +37,9 @@ const PomodoroInfo = () => {
                 </p>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 O que é a Técnica Pomodoro?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
                 <p>
                     A Técnica Pomodoro foi inventada no início dos anos 90 pelo desenvolvedor,
@@ -50,10 +60,15 @@ const PomodoroInfo = () => {
                 </p>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 Como funciona a Técnica Pomodoro?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
+                <div className="flex justify-center">
+                    <img src={image2} width={500} alt="" srcset="" className="rounded-sm" />
+                </div>
+                <br />
+
                 <p>
                     Pomodoro é um sistema cíclico. Dessa forma, você trabalha em intervalos curtos,
                     o que garante uma produtividade consistente. Além disso, você também pode fazer
@@ -95,9 +110,9 @@ const PomodoroInfo = () => {
                 </ol>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 Que tal ver como o método funciona na prática?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
                 <p>
                     Aproveite esse timer e já comece a colocar a técnica em prática. A dica é
@@ -112,9 +127,9 @@ const PomodoroInfo = () => {
                 </p>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 O que fazer se for interrompido?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
                 <p>
                     É importante notar que um pomodoro é uma unidade de trabalho indivisível. Em
@@ -140,9 +155,9 @@ const PomodoroInfo = () => {
                 </ol>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 Quais os resultados desse método?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
                 <p>
                     O processo subjacente à técnica de Cirillo inclui cinco etapas: planejar as
@@ -154,9 +169,9 @@ const PomodoroInfo = () => {
                 </p>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 O que a ciência diz sobre a Técnica Pomodoro?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
                 <p>
                     Se você não sabe, essa teoria tem sido apoiada pela comunidade científica
@@ -197,10 +212,15 @@ const PomodoroInfo = () => {
                 </p>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 Quais os benefícios de adotar essa técnica no trabalho?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
+                <div className="flex justify-center">
+                    <img src={image3} width={500} alt="" srcset="" className="rounded-sm" />
+                </div>
+                <br />
+
                 <h4 className="text-xl font-semibold text-theme-text-secundary">
                     1. Define um tempo para distrações
                 </h4>
@@ -252,9 +272,9 @@ const PomodoroInfo = () => {
                 </p>
             </div>
 
-            <h2 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
+            <h3 className="text-4xl font-bold mt-8 mb-4 text-theme-primary">
                 Quando experimentar a Técnica Pomodoro?
-            </h2>
+            </h3>
             <div className="text-lg space-y-4">
                 <p>
                     Por fim, uma das melhores coisas da Técnica Pomodoro é que ela é gratuita, e
