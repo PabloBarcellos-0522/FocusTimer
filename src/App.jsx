@@ -249,12 +249,12 @@ function App() {
 
     return (
         <>
-            <main className="min-h-screen flex justify-center items-start gap-8 p-4">
-                <div className="flex flex-col items-center">
+            <main className="min-h-screen flex flex-col justify-center items-center gap-8 p-4 lg:flex-row lg:items-start">
+                <div className="flex flex-col items-center max-w-xl lg:w-full">
                     <div className="w-48 h-[60px] bg-theme-text mt-5 rounded-md flex items-center cursor-pointer">
                         <img src={logo} alt="FocusTimer Logo" />
                     </div>
-                    <div className="flex">
+                    <div className="flex flex-wrap justify-center">
                         <Button
                             onClick={() => {
                                 toggleTheme("pomodoro")
@@ -312,7 +312,7 @@ function App() {
                 </div>
 
                 {/* Collum 2: */}
-                <div className="flex flex-col items-center">
+                <div className="flex flex-col items-center w-full px-4 max-w-md">
                     <Button
                         text={"Config"}
                         onClick={() => setSettingsOpen(true)}
@@ -321,14 +321,14 @@ function App() {
                     />
                     <iframe
                         id="youtube-player"
-                        className="w-[399px] h-[225px] rounded-lg"
+                        className="w-full max-w-[399px] h-[225px] rounded-lg shadow-lg"
                         src={videoUrl}
                         title="YouTube video player"
                         // frameBorder="0"
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                         allowFullScreen
                     ></iframe>
-                    <div className="w-[400px] mt-4">
+                    <div className="w-full max-w-[400px] mt-4">
                         <label className="font-bold text-white">Tasks</label>
                         <hr className="border-white mt-1 border-2" />
                     </div>

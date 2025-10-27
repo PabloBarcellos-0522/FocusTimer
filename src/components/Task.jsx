@@ -4,7 +4,6 @@ import { useState } from "react"
 const Task = ({
     isTask = false,
     text = "Add Task",
-    size = 150,
     isCompleted = false,
     onToggleComplete = () => null,
     deleteTask = () => null,
@@ -55,7 +54,8 @@ const Task = ({
             onClick={isTask ? null : clickAddTask}
             className={`   
                 h-[52px]
-                m-5
+                mx-5
+                mt-5
                 rounded-md
                 flex
                 items-center
@@ -64,12 +64,13 @@ const Task = ({
                 text-theme-secundary
                 shadow-[0_5px_5px_0_rgba(0,0,1,0.25)]
                 hover:bg-theme-text-secundary
+                w-full
+                max-w-[400px]
                 ${
                     isTask
                         ? "justify-between px-5 border-l-8 border-theme-secundary"
                         : "justify-center cursor-pointer"
                 }`}
-            style={{ width: `${size}px` }}
         >
             <div
                 className="flex gap-3 items-center cursor-pointer"

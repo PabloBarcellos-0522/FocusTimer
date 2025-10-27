@@ -34,13 +34,12 @@ const TaskManager = ({ tasks, setTasks }) => {
     }
 
     return (
-        <ul>
+        <ul className="w-full flex flex-col items-center">
             {tasks.map((task) => (
                 <Task
                     key={task.id}
                     isTask={true}
                     text={task.text}
-                    size={400}
                     isCompleted={task.isCompleted}
                     onToggleComplete={() => handleToggleComplete(task.id)}
                     deleteTask={() => delTask(task.id)}
@@ -48,7 +47,7 @@ const TaskManager = ({ tasks, setTasks }) => {
                     newTask={() => addTask("", false)}
                 />
             ))}
-            <Task newTask={() => addTask("", false)} size={400} />
+            <Task newTask={() => addTask("", false)} />
         </ul>
     )
 }
